@@ -1,0 +1,98 @@
+TODO before version 0.7.1:
+
+* fast, history-aware differences tree-based arrays (ImmutableArray, LargArray):
+
+Seq<Int> differences(other) returns the different positions between both arrays
+
+
+* fast minus (history-aware differences) for immutable arrays (done), hash sets, maps and tree-based data structures
+
+idea for tree-based structures:
+
+if ordered: easy, traverse in order from left two right, both trees
+
+if unordered for arrays: traverse in bfs-order, memorize nodes by identity and tree-depth in (mutable) hash table. If nodes can be identified, add "old-range/new-range" to the result list.
+The result is a list of pairs (old-range to new range), from this a sequence of updates can be extracted by "filling the gaps" in the new array.   
+
+
+  starting with non-identical-places in immutable-arrays
+
+* ConstantArray: test for same class must handle Null values 
+
+* blog post
+
+* normalize further primitive types in constant arrays
+
+* unittests for merged/transformed/flattened Seq
+
+* unit tests for Collections intersection/merge
+
+* easier conversion, in particular to and from collections, sequences, arrays
+
+* make intersection/merge able to get specialized generic parameters (Set<? extends T> a,Set<? extends T> b) 
+
+* ?? remove immutableSet: all Sets are immutable
+
+* SortedSet:
+findFirst(a) -> firstGreaterOrEqual(a)
+findLast(b) -> lastLarger(b)
+subSet(a,b)
+SortedMap: dito/subMap
+
+* ??? Collections: union(Set<Set> sets)
+
+* Seq
+-formulate contract for equals, independent from implementation
+-hash:use hash of first two elements (if exists)
+-Abstract base class with possibly non-terminating equals
+
+* SeqTransform<M,N> implements Seq<N>, takes Fun<M,N>,Seq<M> in constructor
+
+* GitHub-Account
+
+* Java-8-bridge for gendut
+
+* splitting non-generic part (TODO-Liste Gendut) 
+
+* Can seq be unified with (lazy) lists?
+
+* implement missing methods in LargeArray
+
+* clean up constructors and static constructor methods
+
+* from-collection-constructor-methods 
+
+* probabilistic equal for large catenable arrays
+
+* more tests & documentation
+
+* homomorphisms for tree-based sets
+
+* completion of basic rational arithmetic
+
+* Tests for FFT
+
+* fast multiplication using FFT
+
+* make tree-based algorithms stack-aware (i.e. use explicit stack for 
+very deep trees).
+
+--- Research Topic: History Awareness---
+
+Let D be a (functional) data type. A difference function on D is a function that takes two instances d1,d2 of D and computes a sequence of updates v1,v2,…,v(k) such that d1.v1.v2….v(k) equals d2.
+We say than that v1,v2,…,v(k) is a potential update history from d1 to d2.
+
+Equivalence has to be defined in terms of D. For instance if D is a container class, two instances can be considered equal if they contain the same set of elements, but their iteration order may differ.
+
+We say that D is history-aware if there exists a poly-log function p such that for each instance d of size m and updates u1,u2,...,u(n) the function diff(d, d.u1.u2….u(n))  is computed in O(p(m+n)n) time.
+
+Example: monitoring the state of an online algorithm: “Having memorized two observed states, extract their differences and transmit them to a monitoring client
+
+1. Generally, if D allows insertions and deletions, it is not a good solution to memorize the entire update history.
+2. Many tree-based functional data structures can be made history-aware in an obvious way by traversal.
+
+Task: Make the definitions better.
+Q1: How about other data structures from Okasaki’s book?
+Q2: Are there general constructions for certain data structures (for instance depending on allowed permutations of updates)?
+Q3: Do their exist data types for which the extraction of potential update histories is inherently difficult?
+Task: Write a history-aware collection library or add history-awareness to an existing open source project.
