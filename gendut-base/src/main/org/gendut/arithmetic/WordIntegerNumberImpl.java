@@ -1,8 +1,6 @@
 package org.gendut.arithmetic;
 
 
-//! Internal Representation
-/*<literate>*/
 /**
  * Representation of word-size integers
  **/
