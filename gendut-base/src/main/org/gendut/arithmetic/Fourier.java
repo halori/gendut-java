@@ -1,7 +1,5 @@
 package org.gendut.arithmetic;
 
-//!FFT Routines
-/*<literate>*/
 /**
  * Routines for FFT. Array lengths must be powers of 2.
  */
@@ -17,9 +15,7 @@ final class Fourier {
     }
   }
 
-  /**
-   * This class has no instances.
-   */
+
   private Fourier() {
 
   }
@@ -258,5 +254,4 @@ final class Fourier {
     computeIFFT(aRe, aIm, bRe, bIm);
     return new Pair(bRe, bIm);
   }
-
 }
