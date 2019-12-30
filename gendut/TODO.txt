@@ -7,6 +7,14 @@ Seq<Int> differences(other) returns the different positions between both arrays
 
 * fast minus (history-aware differences) for immutable arrays (done), hash sets, maps and tree-based data structures
 
+* use abstract immutable
+
+* use avl-tree in tree-based collections
+
+*  distinguish between with/without aggregates (for all collections)
+
+* monoid --> aggregate
+
 idea for tree-based structures:
 
 if ordered: easy, traverse in order from left two right, both trees
