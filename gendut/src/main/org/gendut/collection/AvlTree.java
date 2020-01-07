@@ -1,11 +1,9 @@
 package org.gendut.collection;
 
-import static de.ogli.assertions.Assertions.asserts;
+
 import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;
 import static java.math.BigInteger.valueOf;
-
-import de.ogli.assertions.*;
 
 import java.math.BigInteger;
 import java.util.Iterator;
@@ -85,7 +83,7 @@ final class AvlTree {
 	}
 
 	static Object createLeaf(Object o) {
-		Assertions.asserts(o == null || o.getClass() != BinNode.class);
+	//TODO	Assertions.asserts(o == null || o.getClass() != BinNode.class);
 		return o;
 	}
 
@@ -332,14 +330,14 @@ final class AvlTree {
 
 	static BigInteger firstDifference(Object t1, Object t2) {
 
-		asserts(count(t1).equals(count(t2)));
+		//TODOasserts(count(t1).equals(count(t2)));
 
 		PreorderVisitor visitor1 = new PreorderVisitor(t1);
 		PreorderVisitor visitor2 = new PreorderVisitor(t2);
 
 		while (visitor1.hasNext()) {
-			asserts(visitor2.hasNext());
-			asserts(visitor1.leafCount.equals(visitor2.leafCount));
+			//TODOasserts(visitor2.hasNext());
+			//TODOasserts(visitor1.leafCount.equals(visitor2.leafCount));
 			Object node1 = visitor1.curentNode();
 			Object node2 = visitor2.curentNode();
 
@@ -356,8 +354,8 @@ final class AvlTree {
 					visitor2.next();
 				} else {
 					if (count(node2).equals(ONE)) {
-						asserts(isLeaf(node1));
-						asserts(isLeaf(node2));
+						//TODOasserts(isLeaf(node1));
+						//TODOasserts(isLeaf(node2));
 						if (!node1.equals(node2))
 							return visitor1.leafCount;
 					}
@@ -366,9 +364,9 @@ final class AvlTree {
 				}
 			}
 		}
-		asserts(!visitor2.hasNext());
-		asserts(visitor1.leafCount.equals(visitor2.leafCount));
-		asserts(visitor1.leafCount.equals(count(t2)));
+		//TODOasserts(!visitor2.hasNext());
+		//TODOasserts(visitor1.leafCount.equals(visitor2.leafCount));
+		//TODOasserts(visitor1.leafCount.equals(count(t2)));
 
 		return valueOf(-1);
 	}
