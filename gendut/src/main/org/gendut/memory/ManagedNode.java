@@ -1,16 +1,16 @@
 package org.gendut.memory;
 
-public abstract class Node {
-	volatile int hash = -999;
-	volatile int depth;
+public abstract class ManagedNode {
+	private volatile int hash = -9999;
+	private volatile int depth;
 
-	public Node(int maxDepth) {
+	public ManagedNode(int maxDepth) {
 		this.depth = maxDepth;
 	}
 
-	public abstract int getNumberOfChildren();
+	protected abstract int getNumberOfChildren();
 
-	public abstract Object getChild(int i);
+	protected abstract Object getChild(int i);
 
 	@Override
 	final public int hashCode() {
@@ -26,24 +26,26 @@ public abstract class Node {
 		int childCount = getNumberOfChildren();
 		for (int i = 0; i < childCount; i++) {
 			Object child = getChild(i);
-			hash = child.hashCode() + 37 * hash;
-			int d = child instanceof Node ? ((Node) child).depth() : 0;
-			if (d > depth)
-				depth = d;
+			if (child != null) {
+				hash = child.hashCode() + 37 * hash;
+				int d = child instanceof ManagedNode ? ((ManagedNode) child).depth() : 0;
+				if (d > depth)
+					depth = d;
+			}
 		}
 		depth = depth + 1;
 		this.hash = hash == -9999 ? -hash : hash;
 		this.depth = depth > this.depth ? 1 : depth;
 	}
 
-	final int depth() {
-		if (hash == -999) {
+	final public int depth() {
+		if (hash == -9999) {
 			computeHashAndDepth();
 		}
 		return depth;
 	}
 
-	public String getChildName(int i) {
+	protected String getChildName(int i) {
 		return "" + i;
 	}
 
@@ -69,7 +71,7 @@ public abstract class Node {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Node other = (Node) obj;
+		ManagedNode other = (ManagedNode) obj;
 
 		if (this.hashCode() != other.hashCode() || depth() != other.depth())
 			return false;
@@ -84,7 +86,9 @@ public abstract class Node {
 			for (int i = 0; i < childCount; i++) {
 				Object c1 = this.getChild(i);
 				Object c2 = other.getChild(i);
-				if (!c1.equals(c2)) {
+				if ((c1 == null) ^ (c2 == null))
+					return false;
+				if (c1 != null && !c1.equals(c2)) {
 					return false;
 				}
 			}
