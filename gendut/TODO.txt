@@ -1,3 +1,21 @@
+TODO before version 1.0.0:
+
+Complete rework:
+-use assertion library
+-throw out mutable hashset/map as they are provided by nearly all java standard libraries
+-throw out Forward iterator
+-remove the stream class
+-remove iterators from all interfaces but keep iterator<->seq converters
+-rename homomorhic mononid images by "aggregates" 
+-add select/where/join/aggregate/multimap to Seq interface
+-two standard implementations of seq's new methods: lazy (but without optimization) and based on constant arrays
+-simplify class hierarchy
+-complete all Todo's from below
+-experiment with "unifying" node allocation (for O(1)-equality-tests and change detection)
+-implement some basic graph algorithms (e.q. topological sort)
+-implement immutable graph library (for instance, with maintaining spanning trees)   
+
+
 TODO before version 0.7.1:
 
 * fast, history-aware differences tree-based arrays (ImmutableArray, LargArray):
