@@ -1,20 +1,26 @@
 package org.gendut.memory;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class UnifyingAllocatorTest {
 
-	public static class ListNode extends ManagedNode {
+	public static class ListNode extends ManagedNode<ListNode> {
 
-		public final Integer value;
+		public final int value;
 		public final ListNode next;
 
 		public ListNode(Integer value, ListNode next) {
-			super(Integer.MAX_VALUE);
+			super(depthOf(next) + 1, hashOf(value, next));
 			this.value = value;
 			this.next = next;
+		}
+
+		private static int depthOf(ListNode n) {
+			return n == null ? 0 : n.depth;
+		}
+
+		private static int hashOf(int value, ListNode next) {
+			return Integer.hashCode(value) * 37 + 13 * (next == null ? 0 : next.hash);
 		}
 
 		@Override
@@ -26,16 +32,33 @@ public class UnifyingAllocatorTest {
 		protected Object getChild(int i) {
 			switch (i) {
 			case 0:
-				return value;
-			case 1:
 				return next;
+			case 1:
+				return value;
 			default:
 				throw new IndexOutOfBoundsException();
 			}
 		}
+
+		@Override
+		public boolean equalsForChild(int i, ListNode other) {
+			switch (i) {
+			case 0:
+				return next.equals(other.next);
+			case 1:
+				return value == other.value;
+			default:
+				throw new IndexOutOfBoundsException();
+			}
+		}
+
+		@Override
+		protected int getUnmanagedDepth() {
+			return 16;
+		}
 	}
 
-	UnifyingAllocator allocator = new UnifyingAllocator(8);
+	UnifyingAllocator allocator = new UnifyingAllocator();
 
 	static final int N = 500000;
 

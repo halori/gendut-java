@@ -9,21 +9,14 @@ public final class UnifyingAllocator {
 	private final WeakHashMap<Object, WeakReference<Object>> memorizedObject = new WeakHashMap<Object, WeakReference<Object>>(
 			1000);
 
-	private final int unmanagedDepth;
-
-	/**
-	 * a node is unified in storage if and only if its depth has reached the maximum depth
-	 */
-	public UnifyingAllocator(int unmanagedDepth) {
-		this.unmanagedDepth = unmanagedDepth;
-	}
+	
 
 	public Object alloc(Object o) {
 		if (!(o instanceof ManagedNode))
 			return o;
 
 		ManagedNode n = (ManagedNode) o;
-		if (n.depth() % unmanagedDepth == 0)
+		if (n.depth % n.getUnmanagedDepth() == 0)
 			return memorizeObjects(n);
 		else
 			return n;
