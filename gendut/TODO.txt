@@ -1,3 +1,11 @@
+TODO for structural equivalence:
+
+-Introduce marker Interface immutable
+-Immutability Check for... and primitive types.
+-Rename equality total structural equality
+-Immutable arrribute: use structural equality recursively ,else use identity to avoid surprises
+Implement fast weak-ref-hashmap based on structural equality
+
 TODO before version 1.0.0:
 
 Complete rework:
