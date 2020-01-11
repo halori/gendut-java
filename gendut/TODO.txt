@@ -5,6 +5,7 @@ TODO for structural equivalence:
 -Rename equality total structural equality
 -Immutable arrribute: use structural equality recursively ,else use identity to avoid surprises
 Implement fast weak-ref-hashmap based on structural equality
+lazily unification on structural equality test on depth%macdepth = % (<- special nodes, custom made) 
 
 TODO before version 1.0.0:
 
