@@ -7,6 +7,8 @@ TODO for structural equivalence:
 Implement fast weak-ref-hashmap based on structural equality
 lazily unification on structural equality test on depth%macdepth = % (<- special nodes, custom made) 
 
+
+
 TODO before version 1.0.0:
 
 Complete rework:
