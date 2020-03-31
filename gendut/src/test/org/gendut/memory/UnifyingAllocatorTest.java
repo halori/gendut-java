@@ -1,9 +1,9 @@
 package org.gendut.memory;
 
 import org.junit.Test;
-
 public class UnifyingAllocatorTest {
 
+	
 	public static class ListNode extends ManagedNode<ListNode> {
 
 		public final int value;
@@ -54,7 +54,7 @@ public class UnifyingAllocatorTest {
 
 		@Override
 		protected int getUnmanagedDepth() {
-			return 16;
+			return 12;
 		}
 	}
 
