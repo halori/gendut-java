@@ -76,4 +76,9 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 		}
 		return true;
 	}
+
+	public boolean equalsData(ManagedNode o2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
