@@ -2,15 +2,20 @@ package org.gendut.memory;
 
 public abstract class ManagedNode<N extends ManagedNode<N>> {
 
-	public final int depth;
+	/**
+	 * The depth must be one more than the largest depth of its children, if it has
+	 * any. If there aren't any, the depth can be arbitrary. For instance, start
+	 * with a value > 0 if you want to exclude small structures from being cached.
+	 */
+	public final long depth;
 	public final int hash;
 
-	public ManagedNode(int depth, int hash) {
+	public ManagedNode(long depth, int hash) {
 		this.depth = depth;
 		this.hash = hash;
 	}
 
-	public int hashcode() {
+	public final int hashcode() {
 		return hash;
 	}
 
@@ -18,6 +23,12 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 
 	protected abstract Object getChild(int i);
 
+	/**
+	 * only nodes which depth is divided by the unmanaged depth are cached. Its main
+	 * purpose is to speed up structural comparison. The cache consumes extra memory
+	 * but may, in some cases, unify equal structures and then save space. Its major
+	 * drawback is that it slows down the allocation of managed nodes.
+	 */
 	protected abstract int getUnmanagedDepth();
 
 	protected String getChildName(int i) {
@@ -38,6 +49,13 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 		return text.toString();
 	}
 
+	/**
+	 * child objects must be compared by identity. You can overwrite this method in
+	 * order to speed up comparison of primitive elements. This method is typically
+	 * during the allocation of managed nodes, which is not reentrant. Therefore it
+	 * is generally a bad idea to refer to black-box implementations of equals, (of
+	 * generically typed elements, for instance) when you overwrite this method.
+	 */
 	public boolean equalsForChild(int i, N other) {
 		Object c1 = getChild(i);
 		Object c2 = other.getChild(i);
@@ -75,10 +93,5 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 				return false;
 		}
 		return true;
-	}
-
-	public boolean equalsData(ManagedNode o2) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

@@ -15,8 +15,13 @@ public class UnifyingAllocatorTest {
 			this.next = next;
 		}
 
-		private static int depthOf(ListNode n) {
-			return n == null ? 0 : n.depth;
+		private static long depthOf(ListNode n) {
+			return n == null ? 1 : n.depth;
+		}
+		
+		@Override
+		protected int getUnmanagedDepth() {
+			return 8;
 		}
 
 		private static int hashOf(int value, ListNode next) {
@@ -50,11 +55,6 @@ public class UnifyingAllocatorTest {
 			default:
 				throw new IndexOutOfBoundsException();
 			}
-		}
-
-		@Override
-		protected int getUnmanagedDepth() {
-			return 12;
 		}
 	}
 
