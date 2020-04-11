@@ -26,7 +26,14 @@ public final class UnifyingAllocator {
 	private Object memorizeObjects(Object o) {
 		synchronized (memorizedObject) {
 			if (memorizedObject.containsKey(o)) {
-				return memorizedObject.get(o).get();
+				Object ref = memorizedObject.get(o).get();
+				if (ref != null)
+					return ref;
+				else
+				{
+					memorizedObject.put(o, new WeakReference<Object>(o));
+					return o;
+				}
 			} else {
 				memorizedObject.put(o, new WeakReference<Object>(o));
 				return o;
