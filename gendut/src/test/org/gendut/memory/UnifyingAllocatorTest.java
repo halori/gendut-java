@@ -60,11 +60,11 @@ public class UnifyingAllocatorTest {
 
 	UnifyingAllocator allocator = new UnifyingAllocator();
 
-	static final int N = 500000;
+	static final int N = 10000;
 
 	@Test
 	public void testWithoutUnification() {
-		for (int k = 0; k < 50; k++) {
+		for (int k = 0; k < 100; k++) {
 			ListNode p = null;
 			for (int i = 0; i < N; i++) {
 				p = new ListNode(i, p);
@@ -75,7 +75,7 @@ public class UnifyingAllocatorTest {
 
 	@Test
 	public void testWithtUnification() {
-		for (int k = 0; k < 50; k++) {
+		for (int k = 0; k < 100; k++) {
 			ListNode p = null;
 			for (int i = 0; i < N; i++) {
 				p = new ListNode(i, p);
