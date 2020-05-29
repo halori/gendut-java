@@ -1,7 +1,7 @@
 package org.gendut.memory;
 
 public abstract class ManagedNode<N extends ManagedNode<N>> {
-
+	
 	/**
 	 * The depth must be one more than the largest depth of its children, if it has
 	 * any. If there aren't any, the depth can be arbitrary. For instance, start
@@ -50,9 +50,9 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 	}
 
 	/**
-	 * child objects must be compared by identity. You can overwrite this method in
+	 * child objects must be compared by identity(!). You can overwrite this method in
 	 * order to speed up comparison of primitive elements. This method is typically
-	 * during the allocation of managed nodes, which is not reentrant. Therefore it
+	 * called during the allocation of managed nodes, which is not reentrant. Therefore it
 	 * is generally a bad idea to refer to black-box implementations of equals, (of
 	 * generically typed elements, for instance) when you overwrite this method.
 	 */

@@ -1,5 +1,7 @@
 package org.gendut.collection.mutable;
 
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
 import java.util.NoSuchElementException;
 
 import org.gendut.collection.Collections;
@@ -25,9 +27,13 @@ import org.gendut.seq.SeqFromIterator;
 @SuppressWarnings("unchecked")
 public final class MutableHashMap<Key, Value> implements
 		IterableCollection<Pair<Key, Value>> {
+	
 	private int size = 0;
 	private Object[] table;
 
+	ReferenceQueue<Key> refQueue;
+	
+	
 	/*
 	 * Wrap extendible array class so that the class can be used to
 	 * differentiate between user-objects and lists. It is essential that this
@@ -71,6 +77,19 @@ public final class MutableHashMap<Key, Value> implements
 	}
 
 	/**
+	 * Use weak references for the keys. Therefor a reference queue for abandonned references mut be provided.  
+	 */
+	public MutableHashMap(long initialCapacity, ReferenceQueue<Key> refQueue) {
+		if (initialCapacity > Integer.MAX_VALUE / 2)
+			throw new IllegalArgumentException("Capacity too large "
+					+ initialCapacity);
+		
+		this.table = new Object[(int) (2 * initialCapacity)];
+		this.refQueue = refQueue;
+	}
+
+	
+	/**
 	 * The key value must not be null. Furthermore, its equal-method must be
 	 * consistent with the hash values.
 	 */
@@ -84,7 +103,13 @@ public final class MutableHashMap<Key, Value> implements
 		}
 		int k = 2 * (hc % (table.length / 2));
 		if (table[k] == null) {
-			table[k] = a;
+			if (refQueue != null) {
+			  WeakReference<Key> ref = new WeakReference<>(a, refQueue);	
+			  table[k] = ref;
+			}
+			else
+			  table[k] = a;
+			
 			table[k + 1] = b;
 		} else {
 			List list = null;
