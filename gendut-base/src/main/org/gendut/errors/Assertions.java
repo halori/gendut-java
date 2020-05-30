@@ -20,4 +20,10 @@ public class Assertions {
 		if (x == null)
 			throw new NullPointerException("Assertion failed: " + message);
 	}
+
+	public static void asserts(boolean cond) {
+		
+		if (!cond)
+			throw new IllegalStateException("Assertion failed.");
+	}
 }

@@ -21,7 +21,7 @@ public class UnifyingAllocatorTest {
 		
 		@Override
 		protected int getUnmanagedDepth() {
-			return 8;
+			return 16;
 		}
 
 		private static int hashOf(int value, ListNode next) {
@@ -49,7 +49,7 @@ public class UnifyingAllocatorTest {
 		public boolean equalsForChild(int i, ListNode other) {
 			switch (i) {
 			case 0:
-				return next.equals(other.next);
+				return (next == null) ? other.next == null : next.equals(other.next);
 			case 1:
 				return value == other.value;
 			default:
@@ -58,9 +58,9 @@ public class UnifyingAllocatorTest {
 		}
 	}
 
-	UnifyingAllocator allocator = new UnifyingAllocator();
+	static UnifyingAllocator allocator = new UnifyingAllocator();
 
-	static final int N = 10000;
+	static final int N = 1000000;
 
 	@Test
 	public void testWithoutUnification() {

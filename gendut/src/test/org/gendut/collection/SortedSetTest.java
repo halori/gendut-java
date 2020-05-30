@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 
 import org.gendut.algorithm.Comparator;
 import org.gendut.arithmetic.Int;
-import org.gendut.collection.SortedSet;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 

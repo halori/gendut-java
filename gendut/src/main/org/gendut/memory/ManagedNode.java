@@ -1,5 +1,6 @@
 package org.gendut.memory;
 
+
 public abstract class ManagedNode<N extends ManagedNode<N>> {
 	
 	/**
@@ -15,7 +16,7 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 		this.hash = hash;
 	}
 
-	public final int hashcode() {
+	public final int hashCode() {
 		return hash;
 	}
 
@@ -68,12 +69,17 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 	}
 
 	@Override
-	public final boolean equals(Object obj) {
+	public boolean equals(Object obj) {
+		return equals(obj, true);
+	}
+	
+	public final boolean equals(Object obj, boolean allocated) {
 
 		if (this == obj)
 			return true;
-		if (depth % getUnmanagedDepth() == 0)
+		if (depth % getUnmanagedDepth() == 0 && allocated)
 			return this == obj;
+		
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())

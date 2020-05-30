@@ -1,10 +1,5 @@
 package org.gendut.collection;
 
-
-import org.gendut.collection.FixedSizeHashSet;
-import org.gendut.collection.ImmutableArray;
-import org.gendut.collection.ImmutableHashMap;
-
 import junit.framework.TestCase;
 
 public class ArrayHashTest 

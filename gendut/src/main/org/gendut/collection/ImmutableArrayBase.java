@@ -226,7 +226,7 @@ class ImmutableArrayBase<E> {
 		
 		long sizeSteps = size >> ds;
 		
-		ImmutableArrayBase<E> tree = (ImmutableArrayBase<E>) A;
+		ImmutableArrayBase<?> tree = (ImmutableArrayBase<?>) A;
 		
 		collectNonNullPositions(start, sizeSteps, tree.t0, diffPos);
 		start += sizeSteps;

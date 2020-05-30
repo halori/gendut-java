@@ -4,10 +4,6 @@ import java.util.TreeMap;
 
 import junit.framework.TestCase;
 
-import org.gendut.collection.FixedSizeHashMap;
-import org.gendut.collection.FixedSizeHashSet;
-import org.gendut.collection.ImmutableHashMap;
-import org.gendut.collection.ImmutableHashSet;
 import org.gendut.collection.mutable.MutableHashMap;
 import org.gendut.iterator.ForwardIterator;
 

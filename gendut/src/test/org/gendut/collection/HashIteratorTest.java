@@ -1,7 +1,5 @@
 package org.gendut.collection;
 
-import org.gendut.collection.ImmutableHashSet;
-import org.gendut.collection.UpdatableSet;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 

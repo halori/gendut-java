@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import org.gendut.iterator.ForwardIterator;
+
 import junit.framework.TestCase;
 
-import org.gendut.collection.ImmutableHashMap;
-import org.gendut.iterator.ForwardIterator;
 
 public class HashMapAsTupleTest extends TestCase {
   

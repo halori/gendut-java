@@ -1,8 +1,5 @@
 package org.gendut.collection;
 
-import org.gendut.collection.RealtimeQueue;
-import org.gendut.collection.Stack;
-
 import junit.framework.TestCase;
 
 public class RealtimeQueueTest extends TestCase {
