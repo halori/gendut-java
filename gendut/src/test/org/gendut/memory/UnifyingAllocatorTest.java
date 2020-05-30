@@ -1,9 +1,12 @@
 package org.gendut.memory;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
 public class UnifyingAllocatorTest {
 
-	
 	public static class ListNode extends ManagedNode<ListNode> {
 
 		public final int value;
@@ -18,10 +21,10 @@ public class UnifyingAllocatorTest {
 		private static long depthOf(ListNode n) {
 			return n == null ? 1 : n.depth;
 		}
-		
+
 		@Override
 		protected int getUnmanagedDepth() {
-			return 16;
+			return 15;
 		}
 
 		private static int hashOf(int value, ListNode next) {
@@ -58,13 +61,13 @@ public class UnifyingAllocatorTest {
 		}
 	}
 
-	static UnifyingAllocator allocator = new UnifyingAllocator();
+	static final int N = 500;
 
-	static final int N = 1000000;
+	static UnifyingAllocator allocator = new UnifyingAllocator(8, 5);
 
 	@Test
 	public void testWithoutUnification() {
-		for (int k = 0; k < 100; k++) {
+		for (int k = 0; k < 10000; k++) {
 			ListNode p = null;
 			for (int i = 0; i < N; i++) {
 				p = new ListNode(i, p);
@@ -75,12 +78,18 @@ public class UnifyingAllocatorTest {
 
 	@Test
 	public void testWithtUnification() {
-		for (int k = 0; k < 100; k++) {
+		ListNode firstList = null;
+		for (int k = 0; k < 10000; k++) {
 			ListNode p = null;
 			for (int i = 0; i < N; i++) {
 				p = new ListNode(i, p);
 				p = (ListNode) allocator.alloc(p);
 			}
+			if (firstList != null) {
+				assertTrue(firstList.equals(p));
+				assertFalse(firstList.next.equals(p));
+			}
+			firstList = p;
 		}
 	}
 }
