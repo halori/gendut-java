@@ -1,3 +1,22 @@
+TODO: reimplementation:
+
+1. Lazy and O(1) srtucture nodes:
+-hashcode() lazy must be completely evaluated
+-equals() partial evaluation until not equal
+-Equals: if certain height -> put into global identity hash
+-Identity hash: 16 instances for different hashcodes improves concurrency
+-structure node: negative: hashcode, else height
+
+2. immutable fixed size array
+-reusable stack iterator with mutable stack
+-iterator to seq
+-implement java util and on interfaces
+-chunk copy+paste of subarrays
+-special implementations for primitives int, boolean, char, etc. and own number class    
+
+3. naming: monoid-map -> aggretation
+
+
 TODO for structural equivalence:
 
 -Introduce marker Interface immutable
