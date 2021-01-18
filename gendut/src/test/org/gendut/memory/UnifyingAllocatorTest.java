@@ -39,9 +39,9 @@ public class UnifyingAllocatorTest {
 		@Override
 		protected Object getChild(int i) {
 			switch (i) {
-			case 0:
-				return next;
 			case 1:
+				return next;
+			case 0:
 				return value;
 			default:
 				throw new IndexOutOfBoundsException();
@@ -51,9 +51,9 @@ public class UnifyingAllocatorTest {
 		@Override
 		public boolean equalsForChild(int i, ListNode other) {
 			switch (i) {
-			case 0:
-				return (next == null) ? other.next == null : next.equals(other.next);
 			case 1:
+				return (next == null) ? other.next == null : next.equals(other.next, true);
+			case 0:
 				return value == other.value;
 			default:
 				throw new IndexOutOfBoundsException();
