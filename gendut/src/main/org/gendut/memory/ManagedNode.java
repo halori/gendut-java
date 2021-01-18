@@ -63,21 +63,21 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 		if (c1 == null)
 			return c2 == null;
 		if (c1 instanceof ManagedNode) {
-			return c1.equals(c2);
+			return ((ManagedNode)c1).equals(c2, true);
 		}
 		return c1 == c2;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return equals(obj, true);
+		return equals(obj, false);
 	}
 	
-	public final boolean equals(Object obj, boolean allocated) {
+	public final boolean equals(Object obj, boolean internal) {
 
 		if (this == obj)
 			return true;
-		if (depth % getUnmanagedDepth() == 0 && allocated)
+		if (depth % getUnmanagedDepth() == 0 && internal)
 			return this == obj;
 		
 		if (obj == null)
