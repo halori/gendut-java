@@ -24,7 +24,7 @@ public class UnifyingAllocatorTest {
 
 		@Override
 		protected int getUnmanagedDepth() {
-			return 15;
+			return 50;
 		}
 
 		private static int hashOf(int value, ListNode next) {
@@ -61,15 +61,16 @@ public class UnifyingAllocatorTest {
 		}
 	}
 
-	static final int N = 500;
+	static final int LOOPS = 1000;
+	static final int SIZE = 1000000;
 
-	static UnifyingAllocator allocator = new UnifyingAllocator(8, 5);
+	static UnifyingAllocator allocator = new UnifyingAllocator(8, 500);
 
 	@Test
 	public void testWithoutUnification() {
-		for (int k = 0; k < 10000; k++) {
+		for (int k = 0; k < LOOPS; k++) {
 			ListNode p = null;
-			for (int i = 0; i < N; i++) {
+			for (int i = 0; i < SIZE; i++) {
 				p = new ListNode(i, p);
 				p.hashCode();
 			}
@@ -77,11 +78,22 @@ public class UnifyingAllocatorTest {
 	}
 
 	@Test
-	public void testWithtUnification() {
-		ListNode firstList = null;
-		for (int k = 0; k < 10000; k++) {
+	public void testWithUnification() {
+		for (int k = 0; k < LOOPS; k++) {
 			ListNode p = null;
-			for (int i = 0; i < N; i++) {
+			for (int i = 0; i < SIZE; i++) {
+				p = new ListNode(i, p);
+				p = (ListNode) allocator.alloc(p);
+			}
+		}
+	}
+
+	@Test
+	public void testWithUnificationAndCompare() {
+		ListNode firstList = null;
+		for (int k = 0; k < LOOPS; k++) {
+			ListNode p = null;
+			for (int i = 0; i < SIZE; i++) {
 				p = new ListNode(i, p);
 				p = (ListNode) allocator.alloc(p);
 			}
