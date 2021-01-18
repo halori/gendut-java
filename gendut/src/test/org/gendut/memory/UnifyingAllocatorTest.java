@@ -24,7 +24,7 @@ public class UnifyingAllocatorTest {
 
 		@Override
 		protected int getUnmanagedDepth() {
-			return 20;
+			return 16;
 		}
 
 		private static int hashOf(int value, ListNode next) {
@@ -61,10 +61,10 @@ public class UnifyingAllocatorTest {
 		}
 	}
 
-	static final int LOOPS = 100;
-	static final int SIZE = 100000;
+	static final int LOOPS = 10000;
+	static final int SIZE = 1000;
 
-	static UnifyingAllocator allocator = new UnifyingAllocator(8, 500);
+	static final UnifyingAllocator allocator = new UnifyingAllocator(8, 5);
 
 	@Test
 	public void testWithoutUnification() {

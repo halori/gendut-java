@@ -8,7 +8,7 @@ public final class UnifyingAllocator {
 	
 	public UnifyingAllocator(int parallelCount, int initialSize) {
 		this.parallelCount = parallelCount;
-				memorizedObjects = new SingleAllocator[parallelCount];
+		memorizedObjects = new SingleAllocator[parallelCount];
 		for (int i = 0; i < parallelCount; i++) {
 			memorizedObjects[i] = new SingleAllocator(initialSize);
 		}

@@ -5,8 +5,6 @@ import java.util.WeakHashMap;
 	
 public final class SingleAllocator {
 
-	private Exception cleanupException = null; 
-	
 	
 	private WeakHashMap<ManagedNode<?>, WeakReference<ManagedNode<?>>> memorizedNodes;
 	
