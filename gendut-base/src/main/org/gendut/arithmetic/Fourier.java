@@ -2,6 +2,8 @@ package org.gendut.arithmetic;
 
 /**
  * Routines for FFT. Array lengths must be powers of 2.
+ * 
+ * TODO: still used?
  */
 final class Fourier {
 
