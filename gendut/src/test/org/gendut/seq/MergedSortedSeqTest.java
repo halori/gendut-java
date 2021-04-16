@@ -2,7 +2,8 @@ package org.gendut.seq;
 
 import junit.framework.TestCase;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
+
 import org.gendut.collection.ConstantArray;
 import org.gendut.collection.Stack;
 import org.gendut.collection.mutable.ExtendibleArray;

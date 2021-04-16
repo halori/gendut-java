@@ -1,6 +1,7 @@
 package org.gendut.seq;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
+
 import org.gendut.collection.AbstractList;
 import org.gendut.collection.Array;
 import org.gendut.collection.mutable.ExtendibleArray;

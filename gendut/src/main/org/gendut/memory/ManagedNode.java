@@ -57,6 +57,7 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 	 * is generally a bad idea to refer to black-box implementations of equals, (of
 	 * generically typed elements, for instance) when you overwrite this method.
 	 */
+	@SuppressWarnings("rawtypes")
 	public boolean equalsForChild(int i, N other) {
 		Object c1 = getChild(i);
 		Object c2 = other.getChild(i);

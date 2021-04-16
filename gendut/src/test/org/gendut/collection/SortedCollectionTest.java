@@ -1,8 +1,10 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+
+import java.util.Comparator;
 
 import org.gendut.arithmetic.Int;
+import org.gendut.arithmetic.Rational;
 
 import junit.framework.TestCase;
 
@@ -44,7 +46,7 @@ public class SortedCollectionTest extends TestCase {
     }
 
     public void testConstruction() {
-        SortedCollection<Int> tree = SortedCollection.create(Comparator.RationalNatural);
+        SortedCollection<Int> tree = SortedCollection.create(Rational.naturallOrder);
         assertEquals(0, tree.size());
         tree = tree.add(Int.create(100));
         assertTrue(tree.size() == 1);
@@ -57,9 +59,9 @@ public class SortedCollectionTest extends TestCase {
     }
 
     public void testSimpleInsert() {
-        SortedCollection<Int> collection = SortedCollection.create(Comparator.RationalNatural);
+        SortedCollection<Int> collection = SortedCollection.create(Rational.naturallOrder);
         assertEquals(SortedCollection.emptyTree, collection.root);
-        assertEquals(Comparator.RationalNatural, collection.cmp);
+        assertEquals(Rational.naturallOrder, collection.cmp);
         assertEquals(0, collection.size());
         assertEquals(".", SortedCollection.toString(collection.root));
         collection = collection.add(Int.create(1));
@@ -74,7 +76,7 @@ public class SortedCollectionTest extends TestCase {
     }
     
     public void testInsertAndFind() {
-        SortedCollection<Int> collection = SortedCollection.create(Comparator.RationalNatural);
+        SortedCollection<Int> collection = SortedCollection.create(Rational.naturallOrder);
         assertEquals(0, collection.size());
         assertFalse(collection.contains(Int.ONE));
         collection = collection.add(Int.ONE);
@@ -94,7 +96,7 @@ public class SortedCollectionTest extends TestCase {
 
         for (int i = 0; i < N; i++) {
 
-            SortedCollection<Int> collection = SortedCollection.create(Comparator.RationalNatural);
+            SortedCollection<Int> collection = SortedCollection.create(Rational.naturallOrder);
             collection = collection.add(Int.create(2));
             collection = collection.add(Int.create(4));
             collection = collection.add(Int.create(0));

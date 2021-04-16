@@ -1,19 +1,20 @@
 package org.gendut.collection;
 
+import java.util.Comparator;
 import java.util.Random;
 import java.util.TreeSet;
 
 import junit.framework.TestCase;
 
-import org.gendut.algorithm.Comparator;
 import org.gendut.arithmetic.Int;
+import org.gendut.arithmetic.Rational;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 
 public class SortedSetTest extends TestCase {
 
     public void testConstruction() {
-        SortedSet<Int> tree = SortedSet.create(Comparator.RationalNatural);
+        SortedSet<Int> tree = SortedSet.create(Rational.naturallOrder);
         assertEquals(0, tree.size());
         tree = tree.add(Int.create(100));
         assertTrue(tree.size() == 1);
@@ -29,7 +30,7 @@ public class SortedSetTest extends TestCase {
 
         Random rnd = new Random();
 
-        SortedSet<Int> set = SortedSet.create(Comparator.RationalNatural);
+        SortedSet<Int> set = SortedSet.create(Rational.naturallOrder);
 
         set = set.add(Int.create(3));
         set = set.add(Int.create(2));
@@ -74,7 +75,7 @@ public class SortedSetTest extends TestCase {
 
         int N = 100;
 
-        SortedSet<Int> set = SortedSet.create(Comparator.RationalNatural);
+        SortedSet<Int> set = SortedSet.create(Rational.naturallOrder);
 
         for(int i = 0; i < N; i++) {
             set = set.add(Int.create(i));
@@ -89,7 +90,7 @@ public class SortedSetTest extends TestCase {
       int N = 7000;
 
       int[] perm = new int[N]; 
-      SortedSet<Int> set = SortedSet.create(Comparator.RationalNatural);
+      SortedSet<Int> set = SortedSet.create(Rational.naturallOrder);
 
       for (int i = 0; i < N; i++) {
         set = set.add(Int.create(i));

@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
+
 import org.gendut.seq.Seq;
 
 public final class LongInterval implements IntervalRecord<Long, LongInterval> {

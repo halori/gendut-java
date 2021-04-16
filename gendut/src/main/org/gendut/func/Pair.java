@@ -1,7 +1,6 @@
 package org.gendut.func;
 
-import org.gendut.algorithm.Comparator;
-
+import java.util.Comparator;
 
 public final class Pair<A, B>
 {

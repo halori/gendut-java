@@ -1,6 +1,7 @@
 package org.gendut.numerics;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
+
 import org.gendut.collection.IntervalRecord;
 import org.gendut.collection.IntervalSet;
 import org.gendut.collection.MonoidMap;

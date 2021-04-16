@@ -1,6 +1,6 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
 
 // ! Intervalrecord
 /* <literate> */

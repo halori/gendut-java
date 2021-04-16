@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
+
 import org.gendut.arithmetic.Int;
 
 public final class SortedCollection<E> extends CatenableArrayTree<E> implements UpdatableCollection<E, SortedCollection<E>>, CatenableArray<E> {

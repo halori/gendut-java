@@ -6,8 +6,8 @@ import java.util.Random;
 
 import junit.framework.TestCase;
 
-import org.gendut.algorithm.Comparator;
 import org.gendut.arithmetic.Int;
+import org.gendut.arithmetic.Rational;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -40,7 +40,7 @@ public class CollectionsTest extends TestCase {
     S = S.push(Int.create(4));
     S = S.push(Int.create(5));
     S = S.push(Int.create(2));
-    Array<Int> L = Collections.sort(S, Comparator.RationalNatural, 7);
+    Array<Int> L = Collections.sort(S, Rational.naturallOrder, 7);
     assertNotNull(L);
     assertEquals("[1, 2, 2, 4, 5]", L.toString());
     
@@ -51,7 +51,7 @@ public class CollectionsTest extends TestCase {
       for (int i = 0; i < k; i++)
         S = S.push(Int.create(rnd.nextInt(60000)));
       
-      L = Collections.sort(S, Comparator.RationalNatural, 34000);
+      L = Collections.sort(S, Rational.naturallOrder, 34000);
       /*
        * turn L into a tuple for faster access:
        */
@@ -91,12 +91,12 @@ public class CollectionsTest extends TestCase {
     S2 = S2.push(Int.create(2));
     
     
-    Array<Int> L = Collections.merge(S1, S2, Comparator.RationalNatural);
+    Array<Int> L = Collections.merge(S1, S2, Rational.naturallOrder);
     assertNotNull(L);
     assertEquals(10, L.size());
     assertEquals("[1, 2, 3, 3, 3, 4, 4, 5, 7, 8]", L.toString());
 
-    L = Collections.merge(S2, S1, Comparator.RationalNatural);
+    L = Collections.merge(S2, S1, Rational.naturallOrder);
     assertNotNull(L);
     assertEquals(10, L.size());
     assertEquals("[1, 2, 3, 3, 3, 4, 4, 5, 7, 8]", L.toString());

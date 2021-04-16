@@ -1,10 +1,10 @@
 package org.gendut.collection;
 
+import java.util.Comparator;
 import java.util.Random;
 
 import junit.framework.TestCase;
 
-import org.gendut.algorithm.Comparator;
 import org.gendut.arithmetic.Int;
 import org.gendut.arithmetic.Rational;
 import org.gendut.collection.mutable.ExtendibleArray;
@@ -14,7 +14,7 @@ import org.gendut.seq.Seq;
 
 public class IntervalSetTest extends TestCase
 {
-    Comparator<Rational> cmp = Comparator.RationalNatural;
+    Comparator<Rational> cmp = Rational.naturallOrder;
 
     public void tesInsertIntoTree()
     {

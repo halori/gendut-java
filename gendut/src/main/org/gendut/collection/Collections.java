@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
+
 import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.errors.Assertions;
@@ -254,7 +255,7 @@ final public class Collections {
 			else
 				elementStr = elementStr.push(item.toString());
 		}
-		elementStr = Stack.fromCollection(sort(elementStr, Comparator.StringLexicographic));
+		elementStr = Stack.fromCollection(sort(elementStr, (a,b) -> a.compareTo(b)));
 		StringBuffer str = new StringBuffer();
 		str.append("[");
 		ForwardIterator<String> elementStrIt = elementStr.iterator();

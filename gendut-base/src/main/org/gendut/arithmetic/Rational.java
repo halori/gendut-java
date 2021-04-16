@@ -1,5 +1,6 @@
 package org.gendut.arithmetic;
 
+import java.util.Comparator;
 
 //! Rational Numbers
 /*<literate>*/
@@ -7,7 +8,9 @@ package org.gendut.arithmetic;
 It is discouraged to specialize this class outside from its package.
 **/
 public abstract class Rational {
-	 
+	
+  public static final Comparator<Rational> naturallOrder = (a,b) -> a.compareTo(b);
+	
   protected Rational() { // users cannot instantiate this class
   }
        

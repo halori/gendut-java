@@ -1,6 +1,8 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+
+import java.util.Comparator;
+
 import org.gendut.arithmetic.Int;
 import org.gendut.seq.Seq;
 import org.gendut.seq.SeqFromIterator;

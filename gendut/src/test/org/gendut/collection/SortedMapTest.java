@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.util.Comparator;
 import java.util.Random;
 
-import org.gendut.algorithm.Comparator;
 
 import junit.framework.TestCase;
 

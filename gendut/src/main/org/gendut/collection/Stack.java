@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-import org.gendut.algorithm.Comparator;
 import org.gendut.arithmetic.Int;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;

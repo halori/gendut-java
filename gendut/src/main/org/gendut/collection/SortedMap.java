@@ -1,6 +1,6 @@
 package org.gendut.collection;
 
-import org.gendut.algorithm.Comparator;
+import java.util.Comparator;
 
 public final class SortedMap<Key, Value> extends
     AbstractMapFromSet<Key, Value, SortedMap<Key, Value>> implements
