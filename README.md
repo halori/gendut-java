@@ -1,2 +1,2 @@
 # gendut-java
-Immutable Datastructures in Java
+Immutable Datastructures with fast differences in Java
