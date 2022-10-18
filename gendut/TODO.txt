@@ -3,9 +3,9 @@ TODO: reimplementation:
 1. Lazy and O(1) srtucture nodes:
 -hashcode() lazy must be completely evaluated
 -equals() partial evaluation until not equal
--Equals: if certain height -> put into global identity hash
--Identity hash: 16 instances for different hashcodes improves concurrency
--structure node: negative: hashcode, else height
+-Equals: Use shadowing instead of deduplication
+
+
 
 2. immutable fixed size array
 -reusable stack iterator with mutable stack
