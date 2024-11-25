@@ -61,7 +61,7 @@ public class UnifyingAllocatorTest {
 		}
 	}
 	
-	//TODO: change to virtual dedup...
+	//TODO: change to virtual deduplication...
 
 	static final int LOOPS = 10000;
 	static final int SIZE = 10000;
