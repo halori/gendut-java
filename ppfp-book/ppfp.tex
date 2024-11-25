@@ -1,0 +1,146 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+
+\title{Application of Functional Data Structures}
+\author{Oliver Glier}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter*{Preface}
+Have you ever wondered how to implement undo-functionality without cumbersome undo-routines? Or how to maintain different versions of a large collection of data within a small amount of memory? Purely functional data structures can do this trick. This book explains some of the most fundamental functional data structures and how they can be applied in many different situations in every-day-programming. Thus, they are not esotheric species designed for equally esoteric languages. On the contrary, purely functional data structures can be implemented in any programming language, and knowing them can help with the design and implementation of any kind of computer application. The main focus of this book are purely functional data structures and their applications and encompasses nearly 20 years of experience with functional programming in C++, Java and Haskell. 
+\par
+Functional constructs have become mainstream around 2010 in many imperative, object-oriented languages, making the application of functional design patterns much easier. Thus, many programmers are already aquaintant with the benefits of statelesness, lazy evaluation, pattern matching and the like.  Using purely funtional data structures in those maintream languages is logically the next step. 
+The author does not mean that we should always structure entire applications around purely functional programming concepts, albeit this can be acomplished even with imperative programming languages. This book is an attempt to demonstrate how the imparative and the functional programming paradigms can work hand in hand together. Depending on the layer of abstraction and individual design goals, we may alternate freely between both paradigms and here we show some techniques for doing so. We show how testing and interface design is positively affected by funtional paradigms. We show streams a buildings blocks for data processing networks. We will also describe monoids as a special way of isolating state for serial operations. 
+\par
+Since statelessness requires to compute a new structure for each modification, we may keep older versions almost for free. For instance, adding an element to a collection yields a new collection containing the new element, and we will show how to implement this in an efficent way. We will show this for many well-known collection types such as stacks, queues, arrays, hashtables and trees. Implementing functional data structures is relatively easy in languages with garbage collection, but they can also be implemented without. With some "mechanical sympathy", a performance comparable to their imperative counterparts can be accomplished: In a "managed" environment such as java for instance,  the performance penalty is typically around a factor of two. Often, this penalty can be compensated by resutling speed gains in higher abstraction layers, simply because functional data structures allow data sharing of large structures and deliberate us from expensive copying. In addition, there are many cases were purely functional data structure are unavoidable because their
+fundamental properties need to be applied.  Also in the spirit of mixed-paradigm-programming, we give examples of how to augment traiditonal stateful graph reprentations with additional path-related information maintained in functional data structures.
+Sometimes, puerly functional data structures help to design imperative data structures and may be eliminated aferwards. This is because knowing that something can be done efficiently by using purely functional data structures allows us to concentrate on the solely algebraic properties of the problem and its solution, abstracting away many details of how to keep data around. Later we may  refactor our solution into a more efficient, stateful solution, if this is a better fit. In chapter XYZ we demonstrate this by designing a serial change tracking system. 
+ It is an irony that some techniques for purely functional data structures, such as finding structural differences,  can not be applied as first-class citizens in purely funtional languages, simply because memory addresses are not available in those environments --- it would be a design flaw. Towards the end of this book, in chapter XYZ we show how  deduplication would allow us to translate such algorithms into the pure functional world while allowing strong performance guarantees when searching for structural differences. 
+
+
+\chapter{Introduction}
+
+
+\section{Overview of Programming Paradigms}
+imperative, object oriented, functional, purely funtional. Mentioning monads (reference on later section). 
+
+\section {Mechanical Sympathy}
+
+
+\subsection{The CPU}
+branch prediction, concurrency, O-Notation (simplified), garbage collection, reference counting
+
+\subsection{Memory and Data}
+stack, heap, register, hierarchy, caching effects, 
+
+
+\chapter{Testing and Interfacedesign}
+
+\section{Unittests}
+Unittests, healthchecks
+
+\section{Contracts}
+Defensive Programming, concepts, end-to-end tests, 
+
+defensive programming and end-to-end tests.
+
+\section{Contracts}
+assertions
+
+\section{Verification}
+
+\chapter{Pure Functions}
+
+Declarative Interfaces
+Debugging Graphics
+Randomness
+Leaks (memory address, mutalbe objects)
+
+\section{Mixed Paradigms}
+Example: Polygon Boundary Checker
+
+
+\chapter{Control Flow}
+
+\section{Laziness}
+
+Infinite Lists, Streams, Online-Algorithms, Conversion to and from iterators
+
+\section{Monads}
+
+
+boiled-down-monads vs. abstract monads
+Array-DSL
+background from category theory
+
+\section{Multi-Threading}
+\section{Single-Threaded Concurrency}
+Event-Loops
+
+\chapter{Algorithms}
+
+\section{Algebraic Concepts}
+
+\section{Graphs}
+Topological Sorting
+
+\chapter{Basic Data Structures}
+
+
+\section{Lists}
+stack, chunks and performance
+
+\section{Queues}
+Lazy Deque, heap
+
+\section{Hashmaps}
+fixed-size, balancing
+
+
+\chapter{Trees and Path Copying}
+
+
+Undo: 
+very large arrays, maintaining spanning tree
+
+\section{Search Trees}
+AVL-Trees
+
+
+\section{Maintaining aggregates}
+monoids
+
+\section{Fast Differences}
+Shadow-DOM, Server-Sync
+
+
+\section{Bootstrapping imperative Algorithms}
+data changetracker
+
+
+we know that computing fast differences and keeping old versions is feasible.
+
+1. introduce DAG for expressions (not: tree)
+2. do projections, fun-apply, unions, etc. via deltas
+3. use AVL-Trees for maintaining aggregates in group-bys
+4. We know this can be done with our collections
+5. now: lazy eval stacks, states etc. as sketched
+6. discuss tranactions AND serial history => need for global data
+7. push vs pull
+8. would we have gained something by using fast-diff-collections? (no, because of inforced serialization multiple versions are not much usefull)
+
+
+\section{Deduplication, Unleaking Memory Adresses}
+fast differences cannot be made purely fuctional since it involves the nodes memory addresses.
+Leibnitz criteria for identity
+How in purely fuctional languages?
+
+\chapter{Verification}
+Lean (or Idris or Agda) Dependent Types
+
+\end{document}
