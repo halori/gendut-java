@@ -60,9 +60,11 @@ public class UnifyingAllocatorTest {
 			}
 		}
 	}
+	
+	//TODO: change to virtual dedup...
 
 	static final int LOOPS = 10000;
-	static final int SIZE = 1000;
+	static final int SIZE = 10000;
 
 	static final UnifyingAllocator allocator = new UnifyingAllocator(8, 5);
 
