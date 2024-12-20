@@ -1,0 +1,174 @@
+A Case for Purely Functional Data Structures
+
+It always bothered me during the past 20 years of my career, that there is so little common knowledge about the benefits and the use 
+of purely funtional data structures. If you have ever thought those data structures are cumbersum replacements for standard collections
+written for esoteric languages, I hope this article can turn you around.
+
+....
+
+... that a duality between purely functional and imperative programming regulariy shows up: streams vs. iterators, diffing vs. signaling, snaphots vs. journals.
+
+
+Purely functional programming - and thus purely funtional da structures encompasses ...
+
+
+Immutability
+
+No observable state.
+Pure functions.
+Repeatability, well-defined
+
+Laziness
+
+Not all functional data structures need laziness
+...
+
+
+
+mechanical sympathy, balancing hashtabels, large degree of inner nodes or chunks of data
+
+A lazy funtion call is a call to a funtion that might only be evaluated when needed. Its result is called a lazy value.
+Laziness is an important ingredient for purely functional queues, as you are othewise not able to change the end of the queue
+in an efficient manner.
+But laziness is not only needed for efficient purely functional queues. It also allows to structure an entre application
+of the concept of considering its inputs as an infinite stream of events.
+
+
+In fact, a git reposiory is an elaborate functional data structure.
+
+
+Streams
+
+
+A stream has two operations: first(stream) yields its first element, while rest(stream) yields the stream without 
+the first element. Streams can be infinite, which allows us to formulate a great deal of list and stream 
+processing algorithms in a uniform way. 
+Opposed to iterators, purely functional streams are virtually stateless, though infine streams will use laziness. 
+Streams are easier to reason about when building a network of streams with transformations like map, fold, 
+conatenate etc. Many stream transformations can be parallelized, giving us a safe multithreaded environment
+for data processing.
+
+When incooperating purely functional streams in an otherwise stateful application, being able to move freely between both
+worlds allows us to mix purely functional stream processing with traditonal stateful code. Often, otherwise tricky code
+can be implemented by using only a handful of library routines: While turning a stream into an iteator is easy, the
+other way round is a bit more difficult. But once we accomplished this, we have a convenient way to turn
+any iterator based sequence into a threadsafe multi-consumer stream.
+
+Purely functional stream processing, however, brings its own problems of memory leaks: If the reference to the first 
+element of an stream lingers around undetected, we might not notice that we are slowly running out of memory. A common
+cause is when the compiler doesn't optimize for early release of unused resources or moves explicit releases of
+data to unexpected places in the machine code, for instance behind a tail call. A second cause of a memory leak is when a stream 
+is constructed from a large collection which can only be released after the complete stream has been processed.
+Likewise, processing data through an unscheduled network of stream transformations
+may cause large memory overhead due to congestion of individiual streams. With some heuristics for assigning
+computing power to individual transformations, congestion can often be prevented.
+
+
+
+
+
+Augmenting Mutable Data Structures
+
+Given a graph with n points, the Kleene-Warshall-algorithm yields a n x n matrix containing the minimum distance for each
+pair of points. What if the matrix should also store some (not all) path with minimum distance of each connected pair of nodes?
+Does it mean that we have an additional linear factor for time and memory consumption?
+This is where purely functional data structures come into play: AVL-trees make it easy
+to represent lists with only logarithmic concatenation costs. So whenever the minimum distance algorithm adds the
+two numbers, it can conconcate these cooresponding paths in O(log n) time. And whenever the algorithm computes 
+the minimum lenght of a set of paths, it might pick an arbitrary path of minimum length. This yields an only logarithmic
+factor for the asymptotic costs in time and memory.
+
+
+
+
+
+adoption in main stream languages
+.. is for the better:
+
+It is fascinating topic, spanning from mathematical ideas to the hardware. When implementing an immutable data structure, you should have a remote feeling of how data access is affected by modern computer architecture.
+
+The is this beautiful book by Okawasaly, ...
+
+...by a factor of two.
+In system programming languages such as Rust or C++, the penalty might look more bleak. General purpose functional data structures 
+might suffer from poor performance of heap memory, while competing to traditional reliance on stack allocation or memory arenas in those environments.
+However, a data structure that shaves away two or three large matrix computations might well be able to carry its own weight. And in applications with
+stack-like allocation patterns, for instance backtracking or server requests, purely funtional data structures may catch up by the use of custom-made 
+memory arenas.
+
+
+
+
+
+
+
+
+
+Fast Diffing
+
+According to Wikipedia, the ancient concept of identity goes back to the greeks, and it was well expressed by Leibnitz in ...: citation saying:
+
+........
+Regardless of 300 years of progress in philosophy and mathematical logic, this definition is still good enough in our context.
+However, I want to restrict Leibnitz' criteria to logical properties, excluding side-channels such as the timing of performance differences.
+
+
+Keep in mind that while some languages such as Java don't expose memory addresses directly, they might leak through in the form of hashvalues, for instance.
+
+
+
+Identity ... which means, that two mutable records containing equal values can only be equal if they are allocated at the same memory address.
+This is true even if memory addresses are not leaked by the runtime: both records are clearly distinctable by Leibnitz's rule simply be 
+changing a value in one of them.
+
+
+
+Memory deduplication has the nice sideeffect that it also allows for fast diffing of data structures that are built at different places, a common version history is not neccessary.
+
+Usually, you don't want to pay the deduplication costs on each memory allocation. Instead, one can perform the deduplication virtually and on demand by tracking equality 
+classes on each structural equal operation. We call the virtual lazy deduplication then.
+The concept of (lazy virtual) memory deduplication cannot be implemented natively within purely funtional languages because they don't expose memory addresses. In order to provide 
+O(1) structural equality tests in a purely functional language, deduplication should be implemented in the runtime. To my knowledge, none of the mainstream  
+funtional languages (is mainstream a pun?) implement such a concept.
+
+.. because purely funtional data structures don't expose memory addresses.
+
+
+
+bootstrapping
+
+
+
+(make this more accessible by ommitting details!)
+
+Imagine your plan is to listen to changes of collections in the environment (for instance  you monitor input channels or listen to database changes) and then process these inputs in a network of transformations.
+At each node of your network, you store the current set of all collected data so far. When one of the input changes, you might want to update each node of your transformation network.
+
+You can view your input collections of mutable collections of immutable data, thus reducing your problem to adds or deletions. Knowing about purely functional data structures, the design of a famework for this task becomes much easier: Since we know that we can build hashmaps or search trees that allow for versioning and fast differnces of versions, we start with the idea of storing the current collection each node and for each incoming sink, the last processed version of it. We can than work out the algebra typical transformations, such as function application, set operations, projections etc. on paper,
+
+Of course you must still do something about transaction handling if consistency of the inputs is a must. Afer all, your network enforces a serialiation of your transformtions and if two sinks collect data from the same source at different times it might get difficult to bring them together.
+
+Then you find out, that .... Knowing about the implentation of lazy evaluation and about garbage collection, you find out that in most cases, a mutable queue for the changes and a mutable collection for the current state of each will be enough. You strip away all the immutable collections and have, in the end, a sufficient solution mostly based on standard, i.e. mutable, data structures. The point here is, that feasibility of such a change tracking network realizes so much quicker and easier by knowing about functional data structures. If you had started from the bottom up, it is likely you would have been stuck in the details of lazy evaluation and memory management.
+
+
+
+So we end up with one version based diffing, and another based on signaling and channels. It might not be a coincidence that similar distinctions exist in web technology such as ReactJS vs. SolidJS.
+
+
+Consider an AVL-tree based array representation where the array elements are stored in the leaves, while each inner node stores the size of its undrlying subtree. We then have arrays with logarithmic costs for retrieval and updates of individual elements and for concatenation. If we start with an array of size 6 and repeat self-concatenation 100 times in such way that on each step the size doubles, we end up with an array of size 6 * 2^101 elements. This is very large, still we can make updates of individual updates by visiting only around 100 nodes. This is possible, because the in-memory reresentation actually not a tree but a directed acyclic graph of "virtual" trees with huge structural sharing.
+
+Problem: Is there a deterministic polynomial-time algorithm depending on the number of allocated nodes for judjing if two of such trees represent the same array? While there is a fast randomized, hash-based algorithm, the existence or non-existance of a determinsitc algorithm is not obvious.
+
+
+
+
+Problem: Implement the runtime of a purely functional programming structure with amortized O(1) structural equality by using virtual deduplication, i.e. computing equivalence classes on demand.
+
+
+Problem: Implement a concise open-source library for purely functional collections in Rust, including fast diffing. Since it would take me many months in order to become fluent in idiomatic Rust, 
+I'm keenly interested in collaboration.
+
+
+
+
+
