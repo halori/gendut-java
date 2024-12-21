@@ -1,5 +1,7 @@
 A Case for Purely Functional Data Structures
 
+[Leibnitz, Equality]
+
 It always bothered me during the past 20 years of my career, that there is so little common knowledge about the benefits and the use 
 of purely funtional data structures. If you have ever thought those data structures are cumbersum replacements for standard collections
 written for esoteric languages, I hope this article can turn you around.
@@ -168,6 +170,12 @@ Problem: Implement the runtime of a purely functional programming structure with
 Problem: Implement a concise open-source library for purely functional collections in Rust, including fast diffing. Since it would take me many months in order to become fluent in idiomatic Rust, 
 I'm keenly interested in collaboration.
 
+RESEARCH QUESTIONS
+------------------
+* containers with virtual dedupl. in Java vs C++
+* diffing vs. event sourcing => conceptual, change tracker
+* virtual dedupl. as part of a purely funct. language?
+* deterministic fast equlity check of very large arrays possible?
 
 
 

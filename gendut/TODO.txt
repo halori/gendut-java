@@ -31,6 +31,8 @@ lazily unification on structural equality test on depth%macdepth = % (<- special
 TODO before version 1.0.0:
 
 Complete rework:
+-cleanup, remove copied basic classes like BigInteger
+-implemet "virtual deduplication"
 -use assertion library
 -throw out mutable hashset/map as they are provided by nearly all java standard libraries
 -throw out Forward iterator
