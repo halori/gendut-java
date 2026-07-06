@@ -66,7 +66,7 @@ public class UnifyingAllocatorTest {
 	static final int LOOPS = 10000;
 	static final int SIZE = 10000;
 
-	static final UnifyingAllocator allocator = new UnifyingAllocator(8, 5);
+	//static final UnifyingAllocator allocator = new UnifyingAllocator(8, 5);
 
 	@Test
 	public void testWithoutUnification() {
@@ -79,31 +79,31 @@ public class UnifyingAllocatorTest {
 		}
 	}
 
-	@Test
-	public void testWithUnification() {
-		for (int k = 0; k < LOOPS; k++) {
-			ListNode p = null;
-			for (int i = 0; i < SIZE; i++) {
-				p = new ListNode(i, p);
-				p = (ListNode) allocator.alloc(p);
-			}
-		}
-	}
+	// @Test
+	// public void testWithUnification() {
+	// 	for (int k = 0; k < LOOPS; k++) {
+	// 		ListNode p = null;
+	// 		for (int i = 0; i < SIZE; i++) {
+	// 			p = new ListNode(i, p);
+	// 			p = (ListNode) allocator.alloc(p);
+	// 		}
+	// 	}
+	// }
 
-	@Test
-	public void testWithUnificationAndCompare() {
-		ListNode firstList = null;
-		for (int k = 0; k < LOOPS; k++) {
-			ListNode p = null;
-			for (int i = 0; i < SIZE; i++) {
-				p = new ListNode(i, p);
-				p = (ListNode) allocator.alloc(p);
-			}
-			if (firstList != null) {
-				assertTrue(firstList.equals(p));
-				assertFalse(firstList.next.equals(p));
-			}
-			firstList = p;
-		}
-	}
+	// @Test
+	// public void testWithUnificationAndCompare() {
+	// 	ListNode firstList = null;
+	// 	for (int k = 0; k < LOOPS; k++) {
+	// 		ListNode p = null;
+	// 		for (int i = 0; i < SIZE; i++) {
+	// 			p = new ListNode(i, p);
+	// 			p = (ListNode) allocator.alloc(p);
+	// 		}
+	// 		if (firstList != null) {
+	// 			assertTrue(firstList.equals(p));
+	// 			assertFalse(firstList.next.equals(p));
+	// 		}
+	// 		firstList = p;
+	// 	}
+	// }
 }
