@@ -1,5 +1,6 @@
 package org.gendut.memory;
 
+import java.util.WeakHashMap;
 
 public abstract class ManagedNode<N extends ManagedNode<N>> {
 	
@@ -101,4 +102,11 @@ public abstract class ManagedNode<N extends ManagedNode<N>> {
 		}
 		return true;
 	}
+
+
+	//TODO: stripe into several maps
+	private static WeakHashMap<ManagedNode<?>, ManagedNode<?>> eqClasses = new WeakHashMap<ManagedNode<?>, ManagedNode<?>>();
+
+
+	
 }
