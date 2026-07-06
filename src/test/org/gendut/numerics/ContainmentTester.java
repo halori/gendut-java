@@ -1,7 +1,6 @@
 package org.gendut.numerics;
 
-import org.gendut.func.Function;
-
+import java.util.function.Function;
 
 //! Containment Tester 2D
 /*<literate>*/
@@ -38,7 +37,7 @@ public final class ContainmentTester implements Function<Vector, Boolean> {
   /**
    * Test if a point is inside of the polygon.
    */
-  public Boolean get(Vector v) {
+  public Boolean apply(Vector v) {
 
     if (v.size() != 2)
       throw new IllegalArgumentException(

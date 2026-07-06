@@ -65,7 +65,7 @@ extends TestCase {
       }
      
       for (int i = 0; i < N; i++) {
-        assertEquals(Integer.valueOf(i), tuple.get(i));
+        assertEquals(Integer.valueOf(i), tuple.apply(i));
       }    
     }
 }

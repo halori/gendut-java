@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="9" failures="0" name="org.gendut.collection.IntervalSetTest" time="0.07" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="org.gendut.collection.IntervalSetTest" time="0.058" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -59,13 +59,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testSortedInsertAndRemove" time="0.008"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testIteratorAndEquals" time="0.006"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testFind" time="0.006"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testRunPointContainment" time="0.003"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testPointContainment" time="0.013"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testIntersections" time="0.01"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testPointContainment" time="0.017"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testIntersections" time="0.012"/>
   <testcase classname="org.gendut.collection.IntervalSetTest" name="testSortedInsertIntoTree" time="0.014"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testSortedLongIntervalsInsertIntoTree" time="0.007"/>
-  <testcase classname="org.gendut.collection.IntervalSetTest" name="testCreateFromCollection" time="0.003"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testSortedLongIntervalsInsertIntoTree" time="0.004"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testCreateFromCollection" time="0.002"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testSortedInsertAndRemove" time="0.001"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testIteratorAndEquals" time="0.003"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testFind" time="0.005"/>
+  <testcase classname="org.gendut.collection.IntervalSetTest" name="testRunPointContainment" time="0"/>
 </testsuite>

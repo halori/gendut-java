@@ -2,7 +2,8 @@ package org.gendut.seq;
 
 import junit.framework.TestCase;
 
-import org.gendut.func.Function;
+import java.util.function.Function;
+
 import org.gendut.iterator.ForwardIterator;
 
 public class TransformedSeqTest extends TestCase {
@@ -32,14 +33,14 @@ public class TransformedSeqTest extends TestCase {
 	// a reference to "numbers" will be kept somewhere on the heap.
 	public void testFinder1() {
 
-		((FunctionBase<Seq<Long>, Long>) finder()).get(numbers());
+		((FunctionBase<Seq<Long>, Long>) finder()).apply(numbers());
 	}
 
 	// JVM (Java 7) does not cause a memory leak if implementation of "get" is
 	// not "overwritten"
 	public void testFinder2() {
 
-		((Finder) finder()).get(numbers());
+		((Finder) finder()).apply(numbers());
 	}
 
 	static Function<Seq<Long>, Long> finder() {

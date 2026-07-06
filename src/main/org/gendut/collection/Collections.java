@@ -2,10 +2,11 @@ package org.gendut.collection;
 
 import java.math.BigInteger;
 import java.util.Comparator;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.errors.Assertions;
-import org.gendut.func.Function;
 import org.gendut.func.Pair;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.iterator.IterableCollection;
@@ -438,11 +439,11 @@ final public class Collections {
 			final N zero) {
 		return new MonoidMap<M, N>() {
 			public N add(N x, N y) {
-				return add.get(new Pair<N, N>(x, y));
+				return add.apply(new Pair<N, N>(x, y));
 			}
 
 			public N map(M a) {
-				return map.get(a);
+				return map.apply(a);
 			}
 
 			public N zero() {
@@ -603,7 +604,7 @@ final public class Collections {
 		}
 	}
 
-	public static <E> E reduce(Seq<E> seq, BinaryFunction<E, E, E> op, E e) {
+	public static <E> E reduce(Seq<E> seq, BinaryOperator<E> op, E e) {
 		ForwardIterator<E> it = seq.iterator();
 		while (it.hasNext()) {
 			E x = it.next();
@@ -611,7 +612,7 @@ final public class Collections {
 			if (e == null)
 				e = x;
 			else
-				e = op.get(e, x);
+				e = op.apply(e, x);
 		}
 		return e;
 	}

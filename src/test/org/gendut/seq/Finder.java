@@ -10,7 +10,7 @@ public class Finder extends FunctionBase<Seq<Long>, Long> {
 	}
 
 	@Override
-	public Long get(Seq<Long> seq) {
+	public Long apply(Seq<Long> seq) {
 
 		long count = 0;
 		while (seq.first() != k) {

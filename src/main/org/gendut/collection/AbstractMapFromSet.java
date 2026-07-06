@@ -105,7 +105,7 @@ abstract class AbstractMapFromSet<Key, Value, ReturnType extends AbstractMapFrom
         return SeqFromIterator.create(keyIterator());
     }
 
-    final public Value get(Key key)
+    final public Value apply(Key key)
     {
         Object item = asSet.find(key);
         if (item == null)
@@ -120,7 +120,7 @@ abstract class AbstractMapFromSet<Key, Value, ReturnType extends AbstractMapFrom
             return false;
         if (!containsKey(k))
             return false;
-        Value v = get(k);
+        Value v = apply(k);
         if (v == null)
             return e.second() == null;
         else return v.equals(e.second());

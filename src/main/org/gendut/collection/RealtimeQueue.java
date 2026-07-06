@@ -3,8 +3,8 @@ package org.gendut.collection;
 import org.gendut.func.Pair;
 
 import java.math.BigInteger;
+import java.util.function.Function;
 
-import org.gendut.func.Function;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.iterator.IteratorFromSeq;
 import org.gendut.seq.Seq;
@@ -108,7 +108,7 @@ public final class RealtimeQueue<E> implements ImmutableCollection<E>, Array<E> 
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Function<Pair<LazySeq, Pair<Stack, LazySeq>>, LazySeq> rotateRec = new Function<Pair<LazySeq, Pair<Stack, LazySeq>>, LazySeq>() {
-		public LazySeq get(Pair<LazySeq, Pair<Stack, LazySeq>> arg) {
+		public LazySeq apply(Pair<LazySeq, Pair<Stack, LazySeq>> arg) {
 			return rotate(arg.first(), (Stack) arg.second().first(), arg.second().second(), 0);
 		}
 	};

@@ -1,6 +1,5 @@
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/memory/UnifyingAllocatorTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/HashIteratorTest.java
-/home/oliver/localprojects/gendut-java/src/test/org/gendut/algorithms/IntArrayTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/MonoidMaps.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/HashTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/RealtimeQueueTest.java
@@ -26,7 +25,6 @@
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/SortedCollectionTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/LargeArrayTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/LongInterval.java
-/home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/MutableHashTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/seq/Finder.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/collection/ConstantArrayTest.java
 /home/oliver/localprojects/gendut-java/src/test/org/gendut/numerics/VectorTest.java

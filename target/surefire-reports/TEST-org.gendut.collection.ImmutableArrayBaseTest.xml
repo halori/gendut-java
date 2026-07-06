@@ -59,9 +59,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testVeryLargeTuple" time="0.004"/>
-  <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testAgainstArrayList" time="0.004"/>
+  <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testBase" time="0.005"/>
+  <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testVeryLargeTuple" time="0.005"/>
+  <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testAgainstArrayList" time="0.003"/>
   <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testNotNullIterator" time="0"/>
   <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testDifferences" time="0.002"/>
-  <testcase classname="org.gendut.collection.ImmutableArrayBaseTest" name="testBase" time="0.005"/>
 </testsuite>

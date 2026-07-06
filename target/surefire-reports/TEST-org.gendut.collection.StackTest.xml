@@ -59,6 +59,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.gendut.collection.StackTest" name="testPushPop" time="0.004"/>
-  <testcase classname="org.gendut.collection.StackTest" name="testCreation" time="0.001"/>
+  <testcase classname="org.gendut.collection.StackTest" name="testPushPop" time="0.005"/>
+  <testcase classname="org.gendut.collection.StackTest" name="testCreation" time="0"/>
 </testsuite>

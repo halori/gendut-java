@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
 import java.math.BigInteger;
+import java.util.function.Function;
 
-import org.gendut.func.Function;
 import org.gendut.iterator.ForwardIterator;
 
 public interface CatenableArray<E> extends Array<E> {

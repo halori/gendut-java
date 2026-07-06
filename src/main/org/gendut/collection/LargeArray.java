@@ -2,8 +2,7 @@ package org.gendut.collection;
 
 import java.math.BigInteger;
 import java.util.Comparator;
-
-import org.gendut.func.Function;
+import java.util.function.Function;
 
 /**
  * Large, catenable and splitable array implementation with homomorphic images.
@@ -52,7 +51,7 @@ public final class LargeArray<E> extends CatenableArrayTree<E> implements
   final public BigInteger lastOf(final E e) {
     return lastOf(new Function<E, Boolean>() {
       @Override
-      public Boolean get(E f) {
+      public Boolean apply(E f) {
         return f.equals(e);
       }
     });
@@ -61,7 +60,7 @@ public final class LargeArray<E> extends CatenableArrayTree<E> implements
   final public BigInteger firstOf(final E e) {
      return firstOf(new Function<E, Boolean>() {
 		@Override
-		public Boolean get(E f) {
+		public Boolean apply(E f) {
 			return f.equals(e);
 		}
 	});

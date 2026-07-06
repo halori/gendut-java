@@ -2,11 +2,11 @@ package org.gendut.collection;
 
 import java.math.BigInteger;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.function.Function;
 
 import org.gendut.collection.mutable.ExtendibleArray;
-import org.gendut.collection.mutable.MutableHashMap;
-import org.gendut.collection.mutable.MutableHashSet;
-import org.gendut.func.Function;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 import org.gendut.seq.SeqFromIterator;
@@ -56,8 +56,8 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			for (int i = 0; i < n; i++) {
 				MonoidMap map = iter.next();
 				maps[i] = map;
-				leftImages[i] = arr1.images.get(map);
-				rightImages[i] = arr2.images.get(map);
+				leftImages[i] = arr1.images.apply(map);
+				rightImages[i] = arr2.images.apply(map);
 			}
 			this.root = concat(arr1.root, arr2.root, leftImages, rightImages,
 					maps, resultImages);
@@ -161,12 +161,12 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 	}
 
 	final public BigInteger firstOf(Function<E, Boolean> condition) {
-		MutableHashSet<Object> nonMatchingTrees = new MutableHashSet<Object>();
+		HashSet<Object> nonMatchingTrees = new HashSet<Object>();
 		return firstOf(root, condition, nonMatchingTrees);
 	}
 
 	final public BigInteger lastOf(Function<E, Boolean> condition) {
-		MutableHashSet<Object> nonMatchingTrees = new MutableHashSet<Object>();
+		HashSet<Object> nonMatchingTrees = new HashSet<Object>();
 		return lastOf(root, condition, nonMatchingTrees);
 	}
 
@@ -184,12 +184,12 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 
 	@SuppressWarnings("unchecked")
 	final public <F> F getImage(MonoidMap<E, F> map) {
-		return (F) value(images.get(map));
+		return (F) value(images.apply(map));
 	}
 
 	@SuppressWarnings("unchecked")
 	final public <F> F computeImage(MonoidMap<E, F> map) {
-		F image = (F) value(images.get(map));
+		F image = (F) value(images.apply(map));
 		if (image == null)
 			return (F) value(computeImageTree(root, map));
 		else
@@ -621,11 +621,11 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	static BigInteger firstOf(Object root, Function condition,
-			MutableHashSet<Object> nonMatchingTrees) {
+			HashSet<Object> nonMatchingTrees) {
 		if (root == emptyTree)
 			return MINUS_ONE;
 		if (isLeaf(root))
-			return (Boolean) condition.get(root) ? BigInteger.ZERO : MINUS_ONE;
+			return (Boolean) condition.apply(root) ? BigInteger.ZERO : MINUS_ONE;
 		if (nonMatchingTrees.contains(root))
 			return MINUS_ONE;
 		BigInteger leftIndex = firstOf(left(root), condition, nonMatchingTrees);
@@ -647,11 +647,11 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	static BigInteger lastOf(Object root, Function condition,
-			MutableHashSet<Object> nonMatchingTrees) {
+			HashSet<Object> nonMatchingTrees) {
 		if (root == emptyTree)
 			return MINUS_ONE;
 		if (isLeaf(root))
-			return (Boolean) condition.get(root) ? BigInteger.ZERO : MINUS_ONE;
+			return (Boolean) condition.apply(root) ? BigInteger.ZERO : MINUS_ONE;
 		if (nonMatchingTrees.contains(root))
 			return MINUS_ONE;
 		BigInteger rightIndex = lastOf(right(root), condition, nonMatchingTrees);
@@ -692,7 +692,7 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			return map.zero();
 
 		ExtendibleArray<Object> tasks = new ExtendibleArray<Object>();
-		MutableHashMap<Object, Object> nodeToImage = new MutableHashMap<Object, Object>();
+		HashMap<Object, Object> nodeToImage = new HashMap<Object, Object>();
 		tasks.push(root);
 		while (tasks.size() > 0) {
 			Object actual = tasks.top();

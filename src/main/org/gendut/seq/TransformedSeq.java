@@ -1,9 +1,9 @@
 package org.gendut.seq;
 
+import java.util.function.Function;
+
 import org.gendut.collection.AbstractList;
 import org.gendut.collection.mutable.MutableValue;
-import org.gendut.func.Function;
-import org.gendut.func.Functions;
 import org.gendut.func.LazyValue;
 import org.gendut.func.Pair;
 import org.gendut.iterator.ForwardIterator;
@@ -25,7 +25,7 @@ public class TransformedSeq<M, N> extends AbstractList<N> implements Seq<N>
     public static <M, N> Seq<N> create(Seq<M> from,
                     Function<? super M, ? extends N> map)
     {
-        return new TransformedSeq<M, N>(from, Functions.alwaysTrue(), map);
+        return new TransformedSeq<M, N>(from, x -> true, map);
     }
 
     /**
@@ -45,16 +45,16 @@ public class TransformedSeq<M, N> extends AbstractList<N> implements Seq<N>
                         new Function<MutableValue<Seq<M>>, Pair<N, TransformedSeq<M, N>>>()
                         {
                             @Override
-                            public Pair<N, TransformedSeq<M, N>> get(MutableValue<Seq<M>> remaining)
+                            public Pair<N, TransformedSeq<M, N>> apply(MutableValue<Seq<M>> remaining)
                             {
                                 Seq<M> in = remaining.get();
                                 remaining.set(null);
                                 while (!in.isEmpty())
                                 {
                                     M next = in.first();
-                                    if (filter.get(next))
+                                    if (filter.apply(next))
                                     {
-                                        N first = map.get(next);
+                                        N first = map.apply(next);
                                         TransformedSeq<M, N> rest = new TransformedSeq<M, N>(in.rest(), filter, map);
                                         return Pair.create(first, rest);
                                     }

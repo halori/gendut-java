@@ -59,7 +59,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testNavigation" time="0.001"/>
+  <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testRemove" time="0.001"/>
+  <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testNavigation" time="0"/>
   <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testSequence" time="0"/>
   <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testGetForPosition" time="0"/>
   <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testIteratorForPosition" time="0"/>
@@ -69,5 +70,4 @@
   <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testConcat" time="0.001"/>
   <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testSubseq" time="0"/>
   <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testReplace" time="0"/>
-  <testcase classname="org.gendut.collection.CatenableArrayTreeTest" name="testRemove" time="0"/>
 </testsuite>

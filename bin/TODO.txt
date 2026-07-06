@@ -32,7 +32,6 @@ TODO before version 1.0.0:
 
 Complete rework:
 -use assertion library
--throw out mutable hashset/map as they are provided by nearly all java standard libraries
 -throw out Forward iterator
 -remove the stream class
 -remove iterators from all interfaces but keep iterator<->seq converters

@@ -1,7 +1,6 @@
 package org.gendut.collection;
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Comparator;
 

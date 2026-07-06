@@ -6,7 +6,6 @@ org/gendut/collection/RealtimeQueueTest.class
 org/gendut/numerics/LargePolygonContainmentTester$IntersectionAlternator.class
 org/gendut/collection/ImmutableArrayBaseTest.class
 org/gendut/collection/CatenableArrayTreeTest.class
-org/gendut/algorithms/IntArrayTest.class
 org/gendut/seq/TransformedSeqTest.class
 org/gendut/collection/LongInterval$1.class
 org/gendut/seq/FlattenedSeqTest.class
@@ -55,5 +54,4 @@ org/gendut/collection/ConstantArrayTest.class
 org/gendut/collection/MonoidMaps$2.class
 org/gendut/collection/CollectionsTest$1.class
 org/gendut/numerics/LargePolygonContainmentTester$CloseToBorder.class
-org/gendut/collection/MutableHashTest.class
 org/gendut/collection/CollectionsTest.class

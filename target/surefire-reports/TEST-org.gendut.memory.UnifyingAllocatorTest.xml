@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="org.gendut.memory.UnifyingAllocatorTest" time="1.576" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="org.gendut.memory.UnifyingAllocatorTest" time="1.478" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -59,7 +59,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.gendut.memory.UnifyingAllocatorTest" name="testWithoutUnification" time="0.281"/>
-  <testcase classname="org.gendut.memory.UnifyingAllocatorTest" name="testWithUnification" time="0.586"/>
-  <testcase classname="org.gendut.memory.UnifyingAllocatorTest" name="testWithUnificationAndCompare" time="0.709"/>
+  <testcase classname="org.gendut.memory.UnifyingAllocatorTest" name="testWithoutUnification" time="0.286"/>
+  <testcase classname="org.gendut.memory.UnifyingAllocatorTest" name="testWithUnification" time="0.587"/>
+  <testcase classname="org.gendut.memory.UnifyingAllocatorTest" name="testWithUnificationAndCompare" time="0.605"/>
 </testsuite>

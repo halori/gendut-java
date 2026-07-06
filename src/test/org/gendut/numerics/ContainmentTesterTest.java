@@ -19,10 +19,10 @@ public class ContainmentTesterTest extends TestCase {
                 double y = k / 10.0;
                 Vector p = new Vector(x, y);
                 Boolean inside = ((0 <= x) && (x <= 1.0) && (0 <= y) && (y <= 1.0));
-                assertEquals(inside, ct.get(p));
+                assertEquals(inside, ct.apply(p));
             }
-        assertTrue(ct.get(new Vector(-0.0001, -0.0001)));
-        assertTrue(ct.get(new Vector(-0.0001, 0.5)));
+        assertTrue(ct.apply(new Vector(-0.0001, -0.0001)));
+        assertTrue(ct.apply(new Vector(-0.0001, 0.5)));
     }
 
     static long N = 400;
@@ -43,7 +43,7 @@ public class ContainmentTesterTest extends TestCase {
                     double x = i / 10.0;
                     double y = k / 10.0;
                     Vector p = new Vector(x, y);
-                    assertEquals(ct1.get(p), ct2.get(p));
+                    assertEquals(ct1.apply(p), ct2.apply(p));
                 }
             }
         }
@@ -63,7 +63,7 @@ public class ContainmentTesterTest extends TestCase {
                     double x = i / 10.0;
                     double y = k / 10.0;
                     Vector p = new Vector(x, y);
-                    ct.get(p);
+                    ct.apply(p);
                 }
             }
         }

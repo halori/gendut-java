@@ -4,7 +4,6 @@ import java.util.TreeMap;
 
 import junit.framework.TestCase;
 
-import org.gendut.collection.mutable.MutableHashMap;
 import org.gendut.iterator.ForwardIterator;
 
 public class HashTest extends TestCase {
@@ -164,15 +163,15 @@ public class HashTest extends TestCase {
     static public void testSmallImmutableHashMap() {
         ImmutableHashMap<Integer, String> map = ImmutableHashMap.create();
         map = map.put(1, "A");
-        assertEquals(map.get(1), "A");
+        assertEquals(map.apply(1), "A");
         map = map.put(2, "B");
         map = map.put(3, "C");
         assertEquals(3, map.size());
-        assertEquals(map.get(1), "A");
-        assertEquals(map.get(2), "B");
-        assertEquals(map.get(3), "C");
+        assertEquals(map.apply(1), "A");
+        assertEquals(map.apply(2), "B");
+        assertEquals(map.apply(3), "C");
         map = map.put(2, "A");
-        assertEquals(map.get(2), "A");
+        assertEquals(map.apply(2), "A");
         assertEquals(3, map.size());
         map = map.remove(2);
         assertEquals(2, map.size());
@@ -186,7 +185,7 @@ public class HashTest extends TestCase {
             Integer val = i;
             map = map.put(key, val);
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
         }
 
         assertEquals(N, map.size());
@@ -194,7 +193,7 @@ public class HashTest extends TestCase {
             for (int i = 0; i < N; i++) {
                 String item = Integer.toString(i);
                 assertTrue(map.containsKey(item));
-                assertEquals((Integer) i, map.get(item));
+                assertEquals((Integer) i, map.apply(item));
             }
         }
         ForwardIterator<String> keys = map.keyIterator();
@@ -203,7 +202,7 @@ public class HashTest extends TestCase {
             String key = keys.next();
             Integer val = Integer.valueOf(key);
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
             map = map.remove(key);
             assertFalse(map.containsKey(key));
         }
@@ -218,21 +217,21 @@ public class HashTest extends TestCase {
             Integer val = key;
             map = map.put(key, val);
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
         }
         assertEquals(N, map.size());
         for (int k = 0; k < K; k++) {
             for (int i = 0; i < N; i++) {
                 Integer item = i;
                 assertTrue(map.containsKey(item));
-                assertEquals(item, map.get(item));
+                assertEquals(item, map.apply(item));
             }
         }
         for (int i = 0; i < N; i++) {
             Integer key = i;
             Integer val = key;
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
             map = map.remove(key);
             assertFalse(map.containsKey(key));
         }
@@ -247,21 +246,21 @@ public class HashTest extends TestCase {
             Integer val = key;
             map = map.put(key, val);
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
         }
         assertEquals(N, map.size());
         for (int k = 0; k < K; k++) {
             for (int i = 0; i < N; i++) {
                 Integer item = i;
                 assertTrue(map.containsKey(item));
-                assertEquals(item, map.get(item));
+                assertEquals(item, map.apply(item));
             }
         }
         for (int i = 0; i < N; i++) {
             Integer key = i;
             Integer val = key;
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
             map = map.remove(key);
             assertFalse(map.containsKey(key));
         }
@@ -276,80 +275,22 @@ public class HashTest extends TestCase {
             Integer val = i;
             map = map.put(key, val);
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
         }
         assertEquals(N, map.size());
         for (int k = 0; k < K; k++) {
             for (int i = 0; i < N; i++) {
                 String item = Integer.toString(i);
                 assertTrue(map.containsKey(item));
-                assertEquals((Integer) i, map.get(item));
+                assertEquals((Integer) i, map.apply(item));
             }
         }
         for (int i = 0; i < N; i++) {
             String key = Integer.toString(i);
             Integer val = i;
             assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
+            assertEquals(val, map.apply(key));
             map = map.remove(key);
-            assertFalse(map.containsKey(key));
-        }
-        assertEquals(0, map.size());
-    }
-
-    static public void testMutableHashMap() {
-        MutableHashMap<Integer, Integer> map = new MutableHashMap<Integer, Integer>();
-        for (int i = 0; i < N; i++) {
-            Integer key = i;
-            assertFalse(map.containsKey(key));
-            Integer val = key;
-            map.put(key, val);
-            assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
-        }
-        assertEquals(N, map.size());
-        for (int k = 0; k < K; k++) {
-            for (int i = 0; i < N; i++) {
-                Integer item = i;
-                assertTrue(map.containsKey(item));
-                assertEquals(item, map.get(item));
-            }
-        }
-        for (int i = 0; i < N; i++) {
-            Integer key = i;
-            Integer val = key;
-            assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
-            map.remove(key);
-            assertFalse(map.containsKey(key));
-        }
-        assertEquals(0, map.size());
-    }
-
-    static public void testMutableHashMapWithString() {
-        MutableHashMap<String, Integer> map = new MutableHashMap<String, Integer>();
-        for (int i = 0; i < N; i++) {
-            String key = Integer.toString(i);
-            assertFalse(map.containsKey(key));
-            Integer val = i;
-            map.put(key, val);
-            assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
-        }
-        assertEquals(N, map.size());
-        for (int k = 0; k < K; k++) {
-            for (int i = 0; i < N; i++) {
-                String item = Integer.toString(i);
-                assertTrue(map.containsKey(item));
-                assertEquals((Integer) i, map.get(item));
-            }
-        }
-        for (int i = 0; i < N; i++) {
-            String key = Integer.toString(i);
-            Integer val = i;
-            assertTrue(map.containsKey(key));
-            assertEquals(val, map.get(key));
-            map.remove(key);
             assertFalse(map.containsKey(key));
         }
         assertEquals(0, map.size());

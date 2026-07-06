@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
-import junit.framework.TestCase;
+import java.util.function.Function;
 
-import org.gendut.func.Function;
+import junit.framework.TestCase;
 
 public class LazySeqTest extends TestCase {
 
@@ -38,7 +38,7 @@ public class LazySeqTest extends TestCase {
 
 	static Function<Integer, LazySeq<Integer>> nextIntegersLazyRest = new Function<Integer, LazySeq<Integer>>() {
 
-		public LazySeq<Integer> get(Integer chunkStart) {
+		public LazySeq<Integer> apply(Integer chunkStart) {
 			int chunkEnd = chunkStart + chunkSize;
 			int i = chunkEnd - 1;
 			LazySeq<Integer> list = new LazySeq<Integer>(i, nextIntegersLazyRest, chunkEnd);
@@ -53,7 +53,7 @@ public class LazySeqTest extends TestCase {
 	};
 
 	public void testGenerateNumbersLazyRest() {
-		LazySeq<Integer> integers = nextIntegersLazyRest.get(0);
+		LazySeq<Integer> integers = nextIntegersLazyRest.apply(0);
 		for (Integer i = 0; i < 100; i++) {
 			assertEquals(i, integers.first(0));
 			assertEquals(Integer.valueOf(i + 12), integers.first(12));
@@ -66,14 +66,14 @@ public class LazySeqTest extends TestCase {
 
 	static Function<Integer, Integer> increment = new Function<Integer, Integer>() {
 
-		public Integer get(Integer i) {
+		public Integer apply(Integer i) {
 			return i + 1;
 		}
 	};
 
 	static Function<Integer, LazySeq<Integer>> nextIntegersLazyFirstAndRest = new Function<Integer, LazySeq<Integer>>() {
 
-		public LazySeq<Integer> get(Integer chunkStart) {
+		public LazySeq<Integer> apply(Integer chunkStart) {
 			int chunkEnd = chunkStart + chunkSize;
 			int i = chunkEnd - 1;
 			LazySeq<Integer> list = new LazySeq<Integer>(increment, i, nextIntegersLazyFirstAndRest, chunkEnd);
@@ -87,7 +87,7 @@ public class LazySeqTest extends TestCase {
 	};
 
 	public void testGenerateNumbersLazyFirstAndRest() {
-		LazySeq<Integer> integers = nextIntegersLazyFirstAndRest.get(0);
+		LazySeq<Integer> integers = nextIntegersLazyFirstAndRest.apply(0);
 		for (Integer i = 0; i < 100; i++) {
 			assertEquals(Integer.valueOf(i + 1), integers.first(0));
 			assertEquals(Integer.valueOf(i + 13), integers.first(12));

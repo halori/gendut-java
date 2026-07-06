@@ -89,7 +89,7 @@ public class HashMapAsTupleTest extends TestCase {
 
     @SuppressWarnings("unchecked")
     public<V> V get(Attribute<V> attribute) {
-      return (V) map.get(attribute);
+      return (V) map.apply(attribute);
     }
     
     static Tuple create(Attribute<?>[] e) {
@@ -171,7 +171,7 @@ public class HashMapAsTupleTest extends TestCase {
       ForwardIterator<Attribute<?>> iter = map.keyIterator();
       while (iter.hasNext()) {
         Attribute<?> a = iter.next();
-        str.put(a.getName(), map.get(a));
+        str.put(a.getName(), map.apply(a));
       }
       
       StringBuffer buf = new StringBuffer();

@@ -1,7 +1,8 @@
 package org.gendut.seq;
 
+import java.util.function.Function;
+
 import org.gendut.collection.AbstractList;
-import org.gendut.func.Function;
 import org.gendut.func.LazyValue;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.iterator.IteratorFromSeq;
@@ -39,7 +40,7 @@ public final class SeqFromIterator<E> extends AbstractList<E> implements Seq<E>
     private static Function<ForwardIterator, SeqFromIterator> restCons =
                     new Function<ForwardIterator, SeqFromIterator>()
                     {
-                        public SeqFromIterator get(ForwardIterator it)
+                        public SeqFromIterator apply(ForwardIterator it)
                         {
                             return create(it);
                         }

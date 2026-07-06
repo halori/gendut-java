@@ -1,5 +1,7 @@
 package org.gendut.func;
 
+import java.util.function.Function;
+
 // !Chunk for Lazy-Evalution
 /* <literate> */
 /**
@@ -31,7 +33,7 @@ public class LazyValue<T> {
 					Object v = value;
 					value = null;
 					try {
-						value = fun.get(v);
+						value = fun.apply(v);
 					} catch (Throwable e) {
 						value = new ExceptionWrapper();
 						((ExceptionWrapper) value).exception = e;

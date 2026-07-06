@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="org.gendut.collection.ArrayHashTest" time="0.112" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="org.gendut.collection.ArrayHashTest" time="0.202" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -59,10 +59,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.gendut.collection.ArrayHashTest" name="testOnlyFillTupleSequentialTiming" time="0.013"/>
-  <testcase classname="org.gendut.collection.ArrayHashTest" name="testFillTupleSequential" time="0.017"/>
-  <testcase classname="org.gendut.collection.ArrayHashTest" name="testOnlyFillHashSetSequentialTiming" time="0.015"/>
-  <testcase classname="org.gendut.collection.ArrayHashTest" name="testFillHashSetSequential" time="0.022"/>
-  <testcase classname="org.gendut.collection.ArrayHashTest" name="testOnlyFillHashMapSequentialTiming" time="0.02"/>
-  <testcase classname="org.gendut.collection.ArrayHashTest" name="testFillHashMapSequential" time="0.025"/>
+  <testcase classname="org.gendut.collection.ArrayHashTest" name="testOnlyFillTupleSequentialTiming" time="0.027"/>
+  <testcase classname="org.gendut.collection.ArrayHashTest" name="testFillTupleSequential" time="0.03"/>
+  <testcase classname="org.gendut.collection.ArrayHashTest" name="testOnlyFillHashSetSequentialTiming" time="0.029"/>
+  <testcase classname="org.gendut.collection.ArrayHashTest" name="testFillHashSetSequential" time="0.035"/>
+  <testcase classname="org.gendut.collection.ArrayHashTest" name="testOnlyFillHashMapSequentialTiming" time="0.037"/>
+  <testcase classname="org.gendut.collection.ArrayHashTest" name="testFillHashMapSequential" time="0.044"/>
 </testsuite>

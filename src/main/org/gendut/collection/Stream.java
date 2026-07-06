@@ -2,10 +2,10 @@ package org.gendut.collection;
 
 import java.math.BigInteger;
 import java.util.Comparator;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import org.gendut.errors.Assertions;
-import org.gendut.func.Function;
-import org.gendut.func.Functions;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 import org.gendut.seq.Seqs;
@@ -51,8 +51,7 @@ public final class Stream<E> extends AbstractList<E> implements Seq<E> {
 	}
 
 	public Stream<E> filter(Function<E, Boolean> filter) {
-		Function<E, E> id = Functions.id();
-		return new Stream<E>(TransformedSeq.create(seq, filter, id));
+		return new Stream<E>(TransformedSeq.create(seq, filter, Function.identity()));
 	}
 
 	public Stream<E> sorted(Comparator<? super E> cmp) {
@@ -68,7 +67,7 @@ public final class Stream<E> extends AbstractList<E> implements Seq<E> {
 		return new Stream<E>(Collections.skip(seq, maxSize));
 	}
 
-	public E reduce(BinaryFunction<E, E, E> op, E e) {
+	public E reduce(BinaryOperator<E> op, E e) {
 		return Collections.reduce(seq, op, e);
 	}
 

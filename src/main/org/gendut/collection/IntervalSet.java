@@ -2,10 +2,10 @@ package org.gendut.collection;
 
 import java.math.BigInteger;
 import java.util.Comparator;
+import java.util.function.Function;
 
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.collection.mutable.MutableValue;
-import org.gendut.func.Function;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 import org.gendut.seq.SeqFromIterator;
@@ -246,7 +246,7 @@ public final class IntervalSet<T, I extends IntervalRecord<T, I>> extends
 			MutableValue<Boolean> isFinished, N leftResult) {
 		if (tree == emptyTree)
 			throw new IllegalArgumentException("empty tree is not allowed");
-		if (isAbsorbing.get(leftResult)) {
+		if (isAbsorbing.apply(leftResult)) {
 			isFinished.set(true);
 			return leftResult;
 		}
@@ -285,7 +285,7 @@ public final class IntervalSet<T, I extends IntervalRecord<T, I>> extends
 			N leftResult) {
 		if (tree == emptyTree)
 			throw new IllegalArgumentException("empty tree is not allowed");
-		if (isAbsorbing.get(leftResult)) {
+		if (isAbsorbing.apply(leftResult)) {
 			isFinished.set(true);
 			return leftResult;
 		}
@@ -496,7 +496,7 @@ public final class IntervalSet<T, I extends IntervalRecord<T, I>> extends
 	}
 
 	static private Function<Object, Boolean> constantFalse = new Function<Object, Boolean>() {
-		public Boolean get(Object e) {
+		public Boolean apply(Object e) {
 			return false;
 		}
 	};

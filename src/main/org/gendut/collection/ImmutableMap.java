@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.func.Function;
+import java.util.function.Function;
+
 import org.gendut.func.Pair;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;

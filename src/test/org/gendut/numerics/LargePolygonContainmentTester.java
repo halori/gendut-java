@@ -1,11 +1,11 @@
 package org.gendut.numerics;
 
 import java.util.Comparator;
+import java.util.function.Function;
 
 import org.gendut.collection.IntervalRecord;
 import org.gendut.collection.IntervalSet;
 import org.gendut.collection.MonoidMap;
-import org.gendut.func.Function;
 
 
 public class LargePolygonContainmentTester implements Function<Vector, Boolean>
@@ -169,7 +169,7 @@ public class LargePolygonContainmentTester implements Function<Vector, Boolean>
 
     private Function<Boolean, Boolean> alwaysFalse = new Function<Boolean, Boolean>()
     {
-        public Boolean get(Boolean e)
+        public Boolean apply(Boolean e)
         {
             return false;
         }
@@ -222,7 +222,7 @@ public class LargePolygonContainmentTester implements Function<Vector, Boolean>
 
     final static Function<Boolean, Boolean> isTrue = new Function<Boolean, Boolean>()
     {
-        public Boolean get(Boolean e)
+        public Boolean apply(Boolean e)
         {
             return e;
         }
@@ -257,7 +257,7 @@ public class LargePolygonContainmentTester implements Function<Vector, Boolean>
     /**
      * Test if a point is inside of the polygon.
      */
-    public Boolean get(Vector v)
+    public Boolean apply(Vector v)
     {
         if (v.size() != 2)
             throw new IllegalArgumentException(
