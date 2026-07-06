@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.NoSuchElementException;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.errors.Assertions;
 import org.gendut.iterator.ForwardIterator;
@@ -148,10 +148,10 @@ class ImmutableArrayBase<E> {
 		return null;
 	}
 
-	public ConstantArray<Int> differentPositions(ImmutableArrayBase<E> other) {
+	public ConstantArray<BigInteger> differentPositions(ImmutableArrayBase<E> other) {
 		if (other.size != this.size)
 			throw new IllegalArgumentException("Other array must have the same size");
-		ExtendibleArray<Int> diffPos = new ExtendibleArray<Int>();
+		ExtendibleArray<BigInteger> diffPos = new ExtendibleArray<BigInteger>();
 		long capacity = arity;
 		while (capacity < size) {
 			capacity = capacity << ds;
@@ -162,12 +162,12 @@ class ImmutableArrayBase<E> {
 
 	@SuppressWarnings("unchecked")
 	private void collectDifferentPositions(long start, long size, Object A, Object B,
-			ExtendibleArray<Int> diffPos) {
+			ExtendibleArray<BigInteger> diffPos) {
 		if (A == B)
 			return;
 		if (size == 1) {
 			if (!A.equals(B)) {
-				diffPos.add(Int.create(start));
+				diffPos.add(BigInteger.valueOf(start));
 			}
 			return;
 		}
@@ -216,11 +216,11 @@ class ImmutableArrayBase<E> {
 	}
 
 
-	private void collectNonNullPositions(long start, long size, Object A, ExtendibleArray<Int> diffPos) {
+	private void collectNonNullPositions(long start, long size, Object A, ExtendibleArray<BigInteger> diffPos) {
 		if (A == null)
 			return;
 		if (size == 1) {
-			diffPos.add(Int.create(start));
+			diffPos.add(BigInteger.valueOf(start));
 			return;
 		}
 		

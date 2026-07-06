@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 
 public final class SortedCollection<E> extends CatenableArrayTree<E> implements UpdatableCollection<E, SortedCollection<E>>, CatenableArray<E> {
 
@@ -49,23 +49,23 @@ public final class SortedCollection<E> extends CatenableArrayTree<E> implements 
         return (LargeArray<E>) super.catenate(array);
     }
     
-    public SortedCollection<E> subArray(Int start, Int end) {
+    public SortedCollection<E> subArray(BigInteger start, BigInteger end) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public SortedCollection<E> insertAt(Int pos, E e) {
+    public SortedCollection<E> insertAt(BigInteger pos, E e) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public SortedCollection<E> replaceAt(Int pos, E e) {
-        if (pos.compareTo(0) < 0 || pos.compareTo(elementCount()) >= 0)
+    public SortedCollection<E> replaceAt(BigInteger pos, E e) {
+        if (pos.compareTo(BigInteger.ZERO) < 0 || pos.compareTo(elementCount()) >= 0)
             throw new IndexOutOfBoundsException();
         
-        if (pos.compareTo(0) >= 0 && cmp.compare(get(pos.subtract(1)), e) > 0)
+        if (pos.compareTo(BigInteger.ZERO) >= 0 && cmp.compare(get(pos.subtract(BigInteger.ONE)), e) > 0)
             throw new IllegalArgumentException("Predecessor is larger than than new element.");
-        if (pos.compareTo(elementCount()) < 0 && cmp.compare(e, get(pos.add(1))) > 0)
+        if (pos.compareTo(elementCount()) < 0 && cmp.compare(e, get(pos.add(BigInteger.ONE))) > 0)
             throw new IllegalArgumentException("Successor is smaller than new element.");
         
         return new SortedCollection<E>(replace(root, pos, e), cmp);
@@ -83,35 +83,35 @@ public final class SortedCollection<E> extends CatenableArrayTree<E> implements 
         return (E) found;
     }
     
-    final public Int lastOf(E e) {
+    final public BigInteger lastOf(E e) {
       // TODO Auto-generated method stub
       return null;
     }
 
-    final public Int firstOf(E e) {
+    final public BigInteger firstOf(E e) {
       // TODO Auto-generated method stub
       return null;
     }
     
-    public SortedCollection<E> removeAt(Int pos) {
+    public SortedCollection<E> removeAt(BigInteger pos) {
     //TODO
         return null;
     }
     
     public SortedCollection<E> insertAt(long pos, E e) {
-        return insertAt(Int.create(pos),e);
+        return insertAt(BigInteger.valueOf(pos), e);
     }
  
     public SortedCollection<E> removeAt(long pos) {
-        return removeAt(Int.create(pos));
+        return removeAt(BigInteger.valueOf(pos));
     }
 
     public SortedCollection<E> replaceAt(long pos, E e) {
-        return replaceAt(Int.create(pos), e);
+        return replaceAt(BigInteger.valueOf(pos), e);
     }
 
     public SortedCollection<E> subArray(long start, long end) {
-        return subArray(Int.create(start), Int.create(end));
+        return subArray(BigInteger.valueOf(start), BigInteger.valueOf(end));
     }
     
     public SortedCollection<E> addMap(MonoidMap<E, ?> map) {

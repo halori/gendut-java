@@ -1,6 +1,6 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
 
 public class FixedSizeHashMap<Key, Value> extends
     AbstractMapFromSet<Key, Value, FixedSizeHashMap<Key, Value>> implements
@@ -32,8 +32,8 @@ public class FixedSizeHashMap<Key, Value> extends
     return ((FixedSizeHashSet) asSet).capacity();
   }
 
-  public Int elementCount() {
-    return Int.create(size());
+  public BigInteger elementCount() {
+    return BigInteger.valueOf(size());
   }
 
   public FixedSizeHashMap<Key, Value> clear() {

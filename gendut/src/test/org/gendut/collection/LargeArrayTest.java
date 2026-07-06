@@ -1,6 +1,6 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
 
 import junit.framework.TestCase;
 
@@ -46,9 +46,9 @@ public class LargeArrayTest extends TestCase {
     	a = a.add(1).add(2).add(3);
     	a = a.catenate(a);
     	a = a.add(7);
-    	assertEquals(Int.create(0), a.firstOf(1));
-    	assertEquals(Int.create(6), a.firstOf(7));
-    	assertEquals(Int.create(-1), a.firstOf(4));
+    	assertEquals(BigInteger.valueOf(0), a.firstOf(1));
+    	assertEquals(BigInteger.valueOf(6), a.firstOf(7));
+    	assertEquals(BigInteger.valueOf(-1), a.firstOf(4));
     }
     
     static public void testLastOf() {
@@ -56,9 +56,9 @@ public class LargeArrayTest extends TestCase {
       a = a.add(1).add(2).add(3);
       a = a.catenate(a);
       a = a.add(7);
-      assertEquals(Int.create(6), a.lastOf(7));
-      assertEquals(Int.create(-1), a.lastOf(4));
-      assertEquals(Int.create(3), a.lastOf(1));
+      assertEquals(BigInteger.valueOf(6), a.lastOf(7));
+      assertEquals(BigInteger.valueOf(-1), a.lastOf(4));
+      assertEquals(BigInteger.valueOf(3), a.lastOf(1));
     }
     
     static public void testaddMap() {

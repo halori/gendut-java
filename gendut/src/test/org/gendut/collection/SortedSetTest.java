@@ -1,22 +1,21 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.TreeSet;
 
 import junit.framework.TestCase;
 
-import org.gendut.arithmetic.Int;
-import org.gendut.arithmetic.Rational;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 
 public class SortedSetTest extends TestCase {
 
     public void testConstruction() {
-        SortedSet<Int> tree = SortedSet.create(Rational.naturallOrder);
+        SortedSet<BigInteger> tree = SortedSet.create(Comparator.naturalOrder());
         assertEquals(0, tree.size());
-        tree = tree.add(Int.create(100));
+        tree = tree.add(BigInteger.valueOf(100));
         assertTrue(tree.size() == 1);
     }
 
@@ -30,21 +29,21 @@ public class SortedSetTest extends TestCase {
 
         Random rnd = new Random();
 
-        SortedSet<Int> set = SortedSet.create(Rational.naturallOrder);
+        SortedSet<BigInteger> set = SortedSet.create(Comparator.naturalOrder());
 
-        set = set.add(Int.create(3));
-        set = set.add(Int.create(2));
-        set = set.add(Int.create(4));
+        set = set.add(BigInteger.valueOf(3));
+        set = set.add(BigInteger.valueOf(2));
+        set = set.add(BigInteger.valueOf(4));
         assertEquals("[2, 3, 4]", set.toString());
-        assertTrue(set.contains(Int.create(4)));
-        set = set.add(Int.create(1));
+        assertTrue(set.contains(BigInteger.valueOf(4)));
+        set = set.add(BigInteger.valueOf(1));
         assertEquals("[1, 2, 3, 4]", set.toString());
-        assertTrue(set.contains(Int.create(2)));
+        assertTrue(set.contains(BigInteger.valueOf(2)));
 
         int iterCnt = 0;
 
         while (set.size() < N) {
-            Int x = Int.create(rnd.nextInt(N));
+            BigInteger x = BigInteger.valueOf(rnd.nextInt(N));
             if (!set.contains(x)) {
                 set = set.add(x);
                 assertTrue(set.contains(x));
@@ -52,17 +51,17 @@ public class SortedSetTest extends TestCase {
             iterCnt = iterCnt + 1;
         }
 
-        Seq<Int> seq = set.seq();
+        Seq<BigInteger> seq = set.seq();
 
         for (int i = 0; i < N; i++) {
-            assertEquals(Int.create(i), seq.first());
+            assertEquals(BigInteger.valueOf(i), seq.first());
             seq = seq.rest();
         }
         assertTrue(seq.isEmpty());
         
         for (int i = 0; i < 15; i++) {
             int start = rnd.nextInt(N);
-            ForwardIterator<Int> iter = set.iterator(start);
+            ForwardIterator<BigInteger> iter = set.iterator(start);
             for(int k = start; k < N; k++) {
                 assertTrue(iter.hasNext());
                 assertEquals(k, iter.next().intValue());
@@ -75,14 +74,14 @@ public class SortedSetTest extends TestCase {
 
         int N = 100;
 
-        SortedSet<Int> set = SortedSet.create(Rational.naturallOrder);
+        SortedSet<BigInteger> set = SortedSet.create(Comparator.naturalOrder());
 
         for(int i = 0; i < N; i++) {
-            set = set.add(Int.create(i));
+            set = set.add(BigInteger.valueOf(i));
         }
          
         for(int i = 0; i < N; i++) {
-            assertTrue(set.contains(Int.create(i)));
+            assertTrue(set.contains(BigInteger.valueOf(i)));
         }
     }
     
@@ -90,17 +89,17 @@ public class SortedSetTest extends TestCase {
       int N = 7000;
 
       int[] perm = new int[N]; 
-      SortedSet<Int> set = SortedSet.create(Rational.naturallOrder);
+      SortedSet<BigInteger> set = SortedSet.create(Comparator.naturalOrder());
 
       for (int i = 0; i < N; i++) {
-        set = set.add(Int.create(i));
+        set = set.add(BigInteger.valueOf(i));
         perm[i] = -1;
       }
               
       Random rnd = new Random();
       for (int i = N-1; i >= 0; i--) {
         assertEquals(i+1, set.size());
-        Int next = set.get(rnd.nextInt((int)set.size()));
+        BigInteger next = set.get(rnd.nextInt((int)set.size()));
         assertTrue(set.contains(next));
         set = set.remove(next);
         assertEquals(i, set.size());

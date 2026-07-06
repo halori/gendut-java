@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.func.Pair;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -234,9 +234,9 @@ abstract class AbstractMapFromSet<Key, Value, ReturnType extends AbstractMapFrom
             return Collections.equalsForSets(this, obj);
         }
 
-        public Int elementCount()
+        public BigInteger elementCount()
         {
-            return Int.create(size());
+            return BigInteger.valueOf(size());
         }
     }
 
@@ -253,8 +253,8 @@ abstract class AbstractMapFromSet<Key, Value, ReturnType extends AbstractMapFrom
         else return entry.key;
     }
 
-    public Int elementCount()
+    public BigInteger elementCount()
     {
-        return Int.create(size());
+        return BigInteger.valueOf(size());
     }
 }

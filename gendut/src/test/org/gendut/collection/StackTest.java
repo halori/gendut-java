@@ -1,8 +1,9 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
+
 import junit.framework.TestCase;
 
-import org.gendut.arithmetic.Int;
 
 public class StackTest extends TestCase {
   static public void testPushPop() {
@@ -30,18 +31,18 @@ public class StackTest extends TestCase {
   }
   
   static public void testCreation() {
-    Stack<Int> A = Stack.create();
-    A = A.push(Int.create(1));
-    A = A.push(Int.create(2));
-    A = A.push(Int.create(3));
-    A = A.push(Int.create(4));
-    A = A.push(Int.create(5));
-    A = A.push(Int.create(6));
-    A = A.push(Int.create(7));
-    Stack<Int> B = Stack.fromCollection(A);
+    Stack<BigInteger> A = Stack.create();
+    A = A.push(BigInteger.valueOf(1));
+    A = A.push(BigInteger.valueOf(2));
+    A = A.push(BigInteger.valueOf(3));
+    A = A.push(BigInteger.valueOf(4));
+    A = A.push(BigInteger.valueOf(5));
+    A = A.push(BigInteger.valueOf(6));
+    A = A.push(BigInteger.valueOf(7));
+    Stack<BigInteger> B = Stack.fromCollection(A);
     assertEquals("[7, 6, 5, 4, 3, 2, 1]", B.toString());
     assertEquals(A, B);
-    ConstantArray<Int> C = ConstantArray.fromCollection(B);
+    ConstantArray<BigInteger> C = ConstantArray.fromCollection(B);
     assertEquals(A, B);
     assertEquals(A, C);
     assertEquals(A.hashCode(), C.hashCode());
@@ -49,7 +50,7 @@ public class StackTest extends TestCase {
     assertEquals("[6, 5, 4, 3, 2, 1]", B.toString());
     assertNotSame(A, B);
     assertNotSame(C, B);
-    B = B.push(Int.create(7));
+    B = B.push(BigInteger.valueOf(7));
     assertEquals("[7, 6, 5, 4, 3, 2, 1]", B.toString());
     assertEquals(A, B);   
   }

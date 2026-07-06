@@ -1,13 +1,13 @@
 package org.gendut.collection;
 
 
+import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 import junit.framework.TestCase;
 
-import org.gendut.arithmetic.Int;
-import org.gendut.arithmetic.Rational;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -34,13 +34,13 @@ public class CollectionsTest extends TestCase {
   }
   
   static public void testSort() {
-    Stack<Int> S = Stack.create();
-    S = S.push(Int.create(2));
-    S = S.push(Int.create(1));
-    S = S.push(Int.create(4));
-    S = S.push(Int.create(5));
-    S = S.push(Int.create(2));
-    Array<Int> L = Collections.sort(S, Rational.naturallOrder, 7);
+    Stack<BigInteger> S = Stack.create();
+    S = S.push(BigInteger.valueOf(2));
+    S = S.push(BigInteger.valueOf(1));
+    S = S.push(BigInteger.valueOf(4));
+    S = S.push(BigInteger.valueOf(5));
+    S = S.push(BigInteger.valueOf(2));
+    Array<BigInteger> L = Collections.sort(S, Comparator.naturalOrder(), 7);
     assertNotNull(L);
     assertEquals("[1, 2, 2, 4, 5]", L.toString());
     
@@ -49,9 +49,9 @@ public class CollectionsTest extends TestCase {
     for(int k = 2; k < 130000; k = 2 * k) {
       S = Stack.create();
       for (int i = 0; i < k; i++)
-        S = S.push(Int.create(rnd.nextInt(60000)));
+        S = S.push(BigInteger.valueOf(rnd.nextInt(60000)));
       
-      L = Collections.sort(S, Rational.naturallOrder, 34000);
+      L = Collections.sort(S, Comparator.naturalOrder(), 34000);
       /*
        * turn L into a tuple for faster access:
        */
@@ -63,11 +63,11 @@ public class CollectionsTest extends TestCase {
        * compare with result from java util's array sort:
        */
       
-      ConstantArray<Int> A = ConstantArray.fromCollection(S);
+      ConstantArray<BigInteger> A = ConstantArray.fromCollection(S);
       Object[] arr = A.asMutableArray();
       Arrays.sort(arr, new java.util.Comparator<Object>(){
         public int compare(Object o1, Object o2) {
-          return ((Int)o1).compareTo((Int) o2);
+          return ((BigInteger)o1).compareTo((BigInteger) o2);
         }});
       assertEquals(arr.length, L.size());
       for (int i = 0; i < k; i++)
@@ -76,27 +76,27 @@ public class CollectionsTest extends TestCase {
   }
   
   static public void testMerge() {
-    Stack<Int> S1 = Stack.create();
-    S1 = S1.push(Int.create(8));
-    S1 = S1.push(Int.create(4));
-    S1 = S1.push(Int.create(3));
-    S1 = S1.push(Int.create(3));
-    S1 = S1.push(Int.create(1));
+    Stack<BigInteger> S1 = Stack.create();
+    S1 = S1.push(BigInteger.valueOf(8));
+    S1 = S1.push(BigInteger.valueOf(4));
+    S1 = S1.push(BigInteger.valueOf(3));
+    S1 = S1.push(BigInteger.valueOf(3));
+    S1 = S1.push(BigInteger.valueOf(1));
     
-    Stack<Int> S2 = Stack.create();
-    S2 = S2.push(Int.create(7));
-    S2 = S2.push(Int.create(5));
-    S2 = S2.push(Int.create(4));
-    S2 = S2.push(Int.create(3));
-    S2 = S2.push(Int.create(2));
+    Stack<BigInteger> S2 = Stack.create();
+    S2 = S2.push(BigInteger.valueOf(7));
+    S2 = S2.push(BigInteger.valueOf(5));
+    S2 = S2.push(BigInteger.valueOf(4));
+    S2 = S2.push(BigInteger.valueOf(3));
+    S2 = S2.push(BigInteger.valueOf(2));
     
     
-    Array<Int> L = Collections.merge(S1, S2, Rational.naturallOrder);
+    Array<BigInteger> L = Collections.merge(S1, S2, Comparator.naturalOrder());
     assertNotNull(L);
     assertEquals(10, L.size());
     assertEquals("[1, 2, 3, 3, 3, 4, 4, 5, 7, 8]", L.toString());
 
-    L = Collections.merge(S2, S1, Rational.naturallOrder);
+    L = Collections.merge(S2, S1, Comparator.naturalOrder());
     assertNotNull(L);
     assertEquals(10, L.size());
     assertEquals("[1, 2, 3, 3, 3, 4, 4, 5, 7, 8]", L.toString());

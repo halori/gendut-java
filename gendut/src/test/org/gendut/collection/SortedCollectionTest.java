@@ -1,10 +1,8 @@
 package org.gendut.collection;
 
 
+import java.math.BigInteger;
 import java.util.Comparator;
-
-import org.gendut.arithmetic.Int;
-import org.gendut.arithmetic.Rational;
 
 import junit.framework.TestCase;
 
@@ -46,9 +44,9 @@ public class SortedCollectionTest extends TestCase {
     }
 
     public void testConstruction() {
-        SortedCollection<Int> tree = SortedCollection.create(Rational.naturallOrder);
+        SortedCollection<BigInteger> tree = SortedCollection.create(Comparator.naturalOrder());
         assertEquals(0, tree.size());
-        tree = tree.add(Int.create(100));
+        tree = tree.add(BigInteger.valueOf(100));
         assertTrue(tree.size() == 1);
     }
 
@@ -59,32 +57,32 @@ public class SortedCollectionTest extends TestCase {
     }
 
     public void testSimpleInsert() {
-        SortedCollection<Int> collection = SortedCollection.create(Rational.naturallOrder);
+        SortedCollection<BigInteger> collection = SortedCollection.create(Comparator.naturalOrder());
         assertEquals(SortedCollection.emptyTree, collection.root);
-        assertEquals(Rational.naturallOrder, collection.cmp);
+        assertEquals(Comparator.naturalOrder(), collection.cmp);
         assertEquals(0, collection.size());
         assertEquals(".", SortedCollection.toString(collection.root));
-        collection = collection.add(Int.create(1));
+        collection = collection.add(BigInteger.valueOf(1));
         assertEquals(1, collection.size());
         assertEquals("1", SortedCollection.toString(collection.root));
-        collection = collection.add(Int.create(2));
+        collection = collection.add(BigInteger.valueOf(2));
         assertEquals(2, collection.size());
         assertEquals("(1 1 2)", SortedCollection.toString(collection.root));
-        collection = collection.add(Int.create(0));
+        collection = collection.add(BigInteger.valueOf(0));
         assertEquals(3, collection.size());
         assertEquals("((0 0 1) 0 2)", SortedCollection.toString(collection.root));
     }
     
     public void testInsertAndFind() {
-        SortedCollection<Int> collection = SortedCollection.create(Rational.naturallOrder);
+        SortedCollection<BigInteger> collection = SortedCollection.create(Comparator.naturalOrder());
         assertEquals(0, collection.size());
-        assertFalse(collection.contains(Int.ONE));
-        collection = collection.add(Int.ONE);
-        assertTrue(collection.contains(Int.ONE));
-        assertFalse(collection.contains(Int.TWO));
-        collection = collection.add(Int.TWO);
-        assertTrue(collection.contains(Int.ONE));
-        assertTrue(collection.contains(Int.TWO));
+        assertFalse(collection.contains(BigInteger.ONE));
+        collection = collection.add(BigInteger.ONE);
+        assertTrue(collection.contains(BigInteger.ONE));
+        assertFalse(collection.contains(BigInteger.TWO));
+        collection = collection.add(BigInteger.TWO);
+        assertTrue(collection.contains(BigInteger.ONE));
+        assertTrue(collection.contains(BigInteger.TWO));
     }
 
     static public void testConstructionTime() {
@@ -96,12 +94,12 @@ public class SortedCollectionTest extends TestCase {
 
         for (int i = 0; i < N; i++) {
 
-            SortedCollection<Int> collection = SortedCollection.create(Rational.naturallOrder);
-            collection = collection.add(Int.create(2));
-            collection = collection.add(Int.create(4));
-            collection = collection.add(Int.create(0));
-            collection = collection.add(Int.create(1));
-            collection = collection.add(Int.create(3));
+            SortedCollection<BigInteger> collection = SortedCollection.create(Comparator.naturalOrder());
+            collection = collection.add(BigInteger.valueOf(2));
+            collection = collection.add(BigInteger.valueOf(4));
+            collection = collection.add(BigInteger.valueOf(0));
+            collection = collection.add(BigInteger.valueOf(1));
+            collection = collection.add(BigInteger.valueOf(3));
             assertEquals(5, collection.size());
             trees[i % K] = collection;
 

@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.errors.Assertions;
 import org.gendut.func.Function;
@@ -81,8 +81,8 @@ final public class Collections {
 			return 1;
 		}
 
-		public Int elementCount() {
-			return Int.ONE;
+		public BigInteger elementCount() {
+			return BigInteger.ONE;
 		}
 
 		public boolean contains(E e) {
@@ -402,14 +402,14 @@ final public class Collections {
 
 	}
 
-	public static Int count(Seq<?> seq) {
+	public static BigInteger count(Seq<?> seq) {
 		if (seq instanceof ImmutableCollection) {
 			return ((ImmutableCollection<?>) seq).elementCount();
 		} else {
-			Int s = Int.ZERO;
+			BigInteger s = BigInteger.ZERO;
 			ForwardIterator<?> it = seq.iterator();
 			while (it.hasNext()) {
-				s = s.add(Int.ONE);
+				s = s.add(BigInteger.ONE);
 				it.next();
 			}
 			return s;

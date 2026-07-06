@@ -1,6 +1,7 @@
 package org.gendut.seq;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.iterator.IteratorFromSeq;
 
@@ -53,12 +54,12 @@ public class Seqs
         }
     }
 
-    public static <T> Int size(Seq<T> seq)
+    public static <T> BigInteger size(Seq<T> seq)
     {
-        Int size = Int.ZERO;
+        BigInteger size = BigInteger.ZERO;
         while (!seq.isEmpty())
         {
-            size = size.add(Int.ONE);
+            size = size.add(BigInteger.ONE);
             seq = seq.rest();
         }
         return size;

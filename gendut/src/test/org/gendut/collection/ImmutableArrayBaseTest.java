@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.ImmutableArray;
 import org.gendut.iterator.ForwardIterator;
 
@@ -113,19 +113,19 @@ public class ImmutableArrayBaseTest extends TestCase {
 
 	public void testDifferences() {
 		int N = 10000;
-		ImmutableArray<Int> A = ImmutableArray.create(N);
+		ImmutableArray<BigInteger> A = ImmutableArray.create(N);
 		for (int i = 0; i < N / 2; i++) {
-			A = A.set(i, Int.create(i));
+			A = A.set(i, BigInteger.valueOf(i));
 		}
-		ImmutableArray<Int> B = A;
+		ImmutableArray<BigInteger> B = A;
 		assertTrue(A.differentPositions(B).isEmpty());
 		
-		B = B.set(120, Int.create(0));
-		B = B.set(9125, Int.create(0));
-		ConstantArray<Int> differences = A.differentPositions(B);
+		B = B.set(120, BigInteger.valueOf(0));
+		B = B.set(9125, BigInteger.valueOf(0));
+		ConstantArray<BigInteger> differences = A.differentPositions(B);
 		assertEquals("[120, 9125]", differences.toString());
 		
-		B = B.set(0,  Int.create(14));
+		B = B.set(0,  BigInteger.valueOf(4));
 		differences = A.differentPositions(B);
 		assertEquals("[0, 120, 9125]", differences.toString());
 	}

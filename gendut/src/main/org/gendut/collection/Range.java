@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 import org.gendut.seq.SeqFromIterator;
@@ -80,8 +81,8 @@ public final class Range<E> extends AbstractList<E> {
     return end-start;
   }
   
-	public Int elementCount() {
-		return Int.create(size());
+	public BigInteger elementCount() {
+		return BigInteger.valueOf(size());
 	}
   
   static public<E> Range<E> create(Array<? extends E> list, long start, long end) {

@@ -1,9 +1,9 @@
 package org.gendut.collection;
 
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.seq.Seq;
 import org.gendut.seq.SeqFromIterator;
 
@@ -219,17 +219,17 @@ public class CatenableArrayTreeTest extends TestCase {
     Object tree = T(T(T(0, 1), 2), T(3, T(5, 6)));
     assertEquals("(((0 0 1) 0 2) 0 (3 3 (5 5 6)))", tree.toString());
     assertEquals("(((99 99 1) 99 2) 99 (3 3 (5 5 6)))", CatenableArrayTree
-        .replace(tree, Int.create(0), 99).toString());
+        .replace(tree, BigInteger.valueOf(0), 99).toString());
     assertEquals("(((0 0 99) 0 2) 0 (3 3 (5 5 6)))", CatenableArrayTree
-        .replace(tree, Int.create(1), 99).toString());
+        .replace(tree, BigInteger.valueOf(1), 99).toString());
     assertEquals("(((0 0 1) 0 99) 0 (3 3 (5 5 6)))", CatenableArrayTree
-        .replace(tree, Int.create(2), 99).toString());
+        .replace(tree, BigInteger.valueOf(2), 99).toString());
     assertEquals("(((0 0 1) 0 2) 0 (99 99 (5 5 6)))", CatenableArrayTree
-        .replace(tree, Int.create(3), 99).toString());
+        .replace(tree, BigInteger.valueOf(3), 99).toString());
     assertEquals("(((0 0 1) 0 2) 0 (3 3 (99 99 6)))", CatenableArrayTree
-        .replace(tree, Int.create(4), 99).toString());
+        .replace(tree, BigInteger.valueOf(4), 99).toString());
     assertEquals("(((0 0 1) 0 2) 0 (3 3 (5 5 99)))", CatenableArrayTree
-        .replace(tree, Int.create(5), 99).toString());
+        .replace(tree, BigInteger.valueOf(5), 99).toString());
   }
 
   public void testComputeImage() {
@@ -265,43 +265,43 @@ public class CatenableArrayTreeTest extends TestCase {
         CatenableArrayTree.concat(tree2, tree1, null, null, null, null).toString());
 
     Object veryLargeTree = "A";
-    Int veryLargeTreeSize = Int.create(1);
+    BigInteger  veryLargeTreeSize = BigInteger.valueOf(1);
     for (int i = 0; i < 300; i++) {
       veryLargeTree = CatenableArrayTree.concat(veryLargeTree, veryLargeTree, null, null, null, null);
-      veryLargeTreeSize = veryLargeTreeSize.multiply(2);
+      veryLargeTreeSize = veryLargeTreeSize.multiply(BigInteger.valueOf(2));
       assertEquals(veryLargeTreeSize, CatenableArrayTree.count(veryLargeTree));
     }
     veryLargeTree = CatenableArrayTree.concat(tree2, veryLargeTree, null, null, null, null);
-    veryLargeTreeSize = veryLargeTreeSize.add(2);
+    veryLargeTreeSize = veryLargeTreeSize.add(BigInteger.valueOf(2));
     assertEquals(veryLargeTreeSize, CatenableArrayTree.count(veryLargeTree));
   }
 
   public void testSubseq() {
     Object tree = T(T(T(0, 1), T(2, 3)), T(T(4, 5), T(6, 7)));
-    Object subseq = CatenableArrayTree.subseq(tree, Int.create(2),
-        Int.create(7));
-    assertEquals(Int.create(5), CatenableArrayTree.count(subseq));
+    Object subseq = CatenableArrayTree.subseq(tree, BigInteger.valueOf(2),
+        BigInteger.valueOf(7));
+    assertEquals(BigInteger.valueOf(5), CatenableArrayTree.count(subseq));
     assertEquals("((2 2 3) 2 ((4 4 5) 4 6))", subseq.toString());
 
-    subseq = CatenableArrayTree.subseq(tree, Int.create(2), Int.create(9));
-    assertEquals(Int.create(6), CatenableArrayTree.count(subseq));
+    subseq = CatenableArrayTree.subseq(tree, BigInteger.valueOf(2), BigInteger.valueOf(9));
+    assertEquals(BigInteger.valueOf(6), CatenableArrayTree.count(subseq));
     assertEquals("((2 2 3) 2 ((4 4 5) 4 (6 6 7)))", subseq.toString());
 
-    subseq = CatenableArrayTree.subseq(tree, Int.create(-1), Int.create(9));
-    assertEquals(Int.create(8), CatenableArrayTree.count(subseq));
+    subseq = CatenableArrayTree.subseq(tree, BigInteger.valueOf(-1), BigInteger.valueOf(9));
+    assertEquals(BigInteger.valueOf(8), CatenableArrayTree.count(subseq));
     assertEquals(tree.toString(), subseq.toString());
 
-    subseq = CatenableArrayTree.subseq(tree, Int.create(100), Int.create(109));
+    subseq = CatenableArrayTree.subseq(tree, BigInteger.valueOf(100), BigInteger.valueOf(109));
     assertTrue(subseq == CatenableArrayTree.emptyTree);
 
-    subseq = CatenableArrayTree.subseq(tree, Int.create(-10), Int.create(1));
+    subseq = CatenableArrayTree.subseq(tree, BigInteger.valueOf(-10), BigInteger.valueOf(1));
     assertEquals("0", subseq.toString());
 
-    subseq = CatenableArrayTree.subseq(tree, Int.create(-10), Int.create(0));
+    subseq = CatenableArrayTree.subseq(tree, BigInteger.valueOf(-10), BigInteger.valueOf(0));
     assertTrue(subseq == CatenableArrayTree.emptyTree);
 
     subseq = CatenableArrayTree.subseq(CatenableArrayTree.emptyTree,
-        Int.create(-1), Int.create(9));
+        BigInteger.valueOf(-1), BigInteger.valueOf(9));
     assertTrue(subseq == CatenableArrayTree.emptyTree);
   }
 }

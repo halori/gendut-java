@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.collection.mutable.MutableHashMap;
 import org.gendut.collection.mutable.MutableHashSet;
@@ -135,7 +135,7 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 		return (E) last(root);
 	}
 
-	public final Int elementCount() {
+	public final BigInteger elementCount() {
 		return count(root);
 	}
 
@@ -152,29 +152,29 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 	}
 
 	@SuppressWarnings("unchecked")
-	final public E get(Int pos) {
+	final public E get(BigInteger pos) {
 		return (E) get(root, pos);
 	}
 
 	final public E get(long pos) {
-		return get(Int.create(pos));
+		return get(BigInteger.valueOf(pos));
 	}
 
-	final public Int firstOf(Function<E, Boolean> condition) {
+	final public BigInteger firstOf(Function<E, Boolean> condition) {
 		MutableHashSet<Object> nonMatchingTrees = new MutableHashSet<Object>();
 		return firstOf(root, condition, nonMatchingTrees);
 	}
 
-	final public Int lastOf(Function<E, Boolean> condition) {
+	final public BigInteger lastOf(Function<E, Boolean> condition) {
 		MutableHashSet<Object> nonMatchingTrees = new MutableHashSet<Object>();
 		return lastOf(root, condition, nonMatchingTrees);
 	}
 
 	public ForwardIterator<E> iterator(long start) {
-		return iterator(Int.create(start));
+		return iterator(BigInteger.valueOf(start));
 	}
 
-	final public ForwardIterator<E> iterator(Int start) {
+	final public ForwardIterator<E> iterator(BigInteger start) {
 		return new MyIterator<E>(root, start);
 	}
 
@@ -212,12 +212,12 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 
 		public final int height;
 
-		public final Int count;
+		public final BigInteger count;
 
 		private BinNode() {
 			left = right = value = null;
 			height = 0;
-			count = Int.ZERO;
+			count = BigInteger.ZERO;
 		}
 
 		static final public BinNode emptyTree = new BinNode();
@@ -295,9 +295,9 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 	/**
 	 * calculate the number of elements of a tree.
 	 */
-	static Int count(Object tree) {
+	static BigInteger count(Object tree) {
 		if ((tree == null) || (tree.getClass() != BinNode.class))
-			return Int.ONE;
+			return BigInteger.ONE;
 		else
 			return ((BinNode) tree).count;
 	}
@@ -362,13 +362,13 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 	 * TODO: explicit stack for height > maxRecursion Replaces an element at a
 	 * given position. All boundary checks must be performed before the call.
 	 */
-	static <E> Object replace(Object root, Int pos, E e) {
+	static <E> Object replace(Object root, BigInteger pos, E e) {
 		if (root == emptyTree)
 			return e;
 		else if (isLeaf(root)) {
 			return e;
 		} else {
-			Int leftCount = count(left(root));
+			BigInteger  leftCount = count(left(root));
 			int cmp = pos.compareTo(leftCount);
 			if (cmp < 0)
 				return combine(replace(left(root), pos, e), right(root));
@@ -382,7 +382,7 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 	 * TODO: explicit stack for height > maxRecursion Replaces an element at a
 	 * given position. All boundary checks must be performed before the call.
 	 */
-	static <E> Object insertAt(Object root, Int pos, E e) {
+	static <E> Object insertAt(Object root, BigInteger pos, E e) {
 		if (root == emptyTree)
 			return e;
 		else if (isLeaf(root)) {
@@ -391,7 +391,7 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			else
 				return combine(root, e);
 		} else {
-			Int leftCount = count(left(root));
+			BigInteger leftCount = count(left(root));
 			int cmp = pos.compareTo(leftCount);
 			if (cmp < 0)
 				return balance(insertAt(left(root), pos, e), right(root));
@@ -544,11 +544,11 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			gotoFirst(tree);
 		}
 
-		public MyIterator(Object tree, Int pos) {
-			Int originalPos = pos;
+		public MyIterator(Object tree, BigInteger pos) {
+			BigInteger originalPos = pos;
 
 			while (tree != emptyTree) {
-				if (pos.equals(Int.ZERO)) {
+				if (pos.equals(BigInteger.ZERO)) {
 					gotoFirst(tree);
 					return;
 				} else if (isLeaf(tree)) {
@@ -556,8 +556,8 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 				} else {
 					Object left = left(tree);
 					Object right = right(tree);
-					Int posInRightSubtree = pos.subtract(count(left));
-					if (posInRightSubtree.compareTo(Int.ZERO) >= 0) {
+					BigInteger posInRightSubtree = pos.subtract(count(left));
+					if (posInRightSubtree.compareTo(BigInteger.ZERO) >= 0) {
 						pos = posInRightSubtree;
 						tree = right;
 					} else {
@@ -594,20 +594,20 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 		}
 	}
 
-	static Object get(Object tree, Int pos) {
+	static Object get(Object tree, BigInteger pos) {
 
-		Int originalPos = pos;
+		BigInteger originalPos = pos;
 
 		while (tree != emptyTree) {
-			if (pos.equals(Int.ZERO))
+			if (pos.equals(BigInteger.ZERO))
 				return value(tree);
 
 			if (isLeaf(tree))
 				tree = emptyTree;
 			else {
 				Object left = left(tree);
-				Int posInRightSubtree = pos.subtract(count(left));
-				if (posInRightSubtree.compareTo(Int.ZERO) >= 0) {
+				BigInteger posInRightSubtree = pos.subtract(count(left));
+				if (posInRightSubtree.compareTo(BigInteger.ZERO) >= 0) {
 					pos = posInRightSubtree;
 					tree = right(tree);
 				} else
@@ -617,20 +617,22 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 		throw new IndexOutOfBoundsException("position " + originalPos);
 	}
 
+	private static BigInteger MINUS_ONE = BigInteger.valueOf(-1);
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	static Int firstOf(Object root, Function condition,
+	static BigInteger firstOf(Object root, Function condition,
 			MutableHashSet<Object> nonMatchingTrees) {
 		if (root == emptyTree)
-			return Int.MINUS_ONE;
+			return MINUS_ONE;
 		if (isLeaf(root))
-			return (Boolean) condition.get(root) ? Int.ZERO : Int.MINUS_ONE;
+			return (Boolean) condition.get(root) ? BigInteger.ZERO : MINUS_ONE;
 		if (nonMatchingTrees.contains(root))
-			return Int.MINUS_ONE;
-		Int leftIndex = firstOf(left(root), condition, nonMatchingTrees);
-		if (!leftIndex.equals(Int.MINUS_ONE))
+			return MINUS_ONE;
+		BigInteger leftIndex = firstOf(left(root), condition, nonMatchingTrees);
+		if (!leftIndex.equals(MINUS_ONE))
 			return leftIndex;
-		Int rightIndex = firstOf(right(root), condition, nonMatchingTrees);
-		if (!rightIndex.equals(Int.MINUS_ONE))
+		BigInteger rightIndex = firstOf(right(root), condition, nonMatchingTrees);
+		if (!rightIndex.equals(MINUS_ONE))
 			return count(left(root)).add(rightIndex);
 		else {
 			/**
@@ -639,24 +641,24 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			 */
 			if (height(root) > 3)
 				nonMatchingTrees.add(root);
-			return Int.MINUS_ONE;
+			return MINUS_ONE;
 		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	static Int lastOf(Object root, Function condition,
+	static BigInteger lastOf(Object root, Function condition,
 			MutableHashSet<Object> nonMatchingTrees) {
 		if (root == emptyTree)
-			return Int.MINUS_ONE;
+			return MINUS_ONE;
 		if (isLeaf(root))
-			return (Boolean) condition.get(root) ? Int.ZERO : Int.MINUS_ONE;
+			return (Boolean) condition.get(root) ? BigInteger.ZERO : MINUS_ONE;
 		if (nonMatchingTrees.contains(root))
-			return Int.MINUS_ONE;
-		Int rightIndex = lastOf(right(root), condition, nonMatchingTrees);
-		if (!rightIndex.equals(Int.MINUS_ONE))
+			return MINUS_ONE;
+		BigInteger rightIndex = lastOf(right(root), condition, nonMatchingTrees);
+		if (!rightIndex.equals(MINUS_ONE))
 			return count(left(root)).add(rightIndex);
-		Int leftIndex = lastOf(left(root), condition, nonMatchingTrees);
-		if (!leftIndex.equals(Int.MINUS_ONE))
+		BigInteger leftIndex = lastOf(left(root), condition, nonMatchingTrees);
+		if (!leftIndex.equals(MINUS_ONE))
 			return leftIndex;
 		else {
 			/**
@@ -665,7 +667,7 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			 */
 			if (height(root) > 3)
 				nonMatchingTrees.add(root);
-			return Int.MINUS_ONE;
+			return MINUS_ONE;
 		}
 	}
 
@@ -744,9 +746,9 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 	}
 
 	// TODO: version for images, maxRecDepth, explicit stack
-	static Object subseq(Object tree, Int start, Int end) {
+	static Object subseq(Object tree, BigInteger start, BigInteger end) {
 
-		if ((start.compareTo(Int.ZERO) <= 0)
+		if ((start.compareTo(BigInteger.ZERO) <= 0)
 				&& (end.compareTo(count(tree)) >= 0))
 			return tree;
 
@@ -754,8 +756,8 @@ abstract class CatenableArrayTree<E> extends AbstractList<E> implements
 			return emptyTree;
 		}
 		Object left = left(tree);
-		Int leftSize = count(left);
-		boolean isInLeft = (start.compareTo(leftSize.subtract(Int.ONE)) <= 0);
+		BigInteger leftSize = count(left);
+		boolean isInLeft = (start.compareTo(leftSize.subtract(BigInteger.ONE)) <= 0);
 		boolean isInRight = (end.compareTo(leftSize) >= 0);
 		if (isInLeft && isInRight)
 			return concat(

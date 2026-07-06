@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -131,9 +132,9 @@ public final class ImmutableArray<E> extends ImmutableArrayBase<E>
         return tuple;
     }
 
-    public Int elementCount()
+    public BigInteger elementCount()
     {
-        return Int.create(size());
+        return BigInteger.valueOf(size());
     }
     
 

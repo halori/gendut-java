@@ -1,9 +1,9 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 
@@ -316,9 +316,9 @@ public final class Stack<E> extends AbstractList<E>
         return S;
     }
 
-    public Int elementCount()
+    public BigInteger elementCount()
     {
-        return Int.create(size());
+        return BigInteger.valueOf(size());
     }
 
     public boolean isEmpty()

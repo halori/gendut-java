@@ -1,6 +1,7 @@
 package org.gendut.collection.mutable;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.collection.Collections;
 import org.gendut.collection.ConstantArray;
 import org.gendut.iterator.ForwardIterator;
@@ -409,9 +410,9 @@ public final class ExtendibleArray<E> implements IterableCollection<E>
         addLast(item);
     }
 
-    public Int elementCount()
+    public BigInteger elementCount()
     {
-        return Int.create(size());
+        return BigInteger.valueOf(size());
     }
 
     public boolean isEmpty()

@@ -1,5 +1,6 @@
 package org.gendut.collection;
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
 import org.gendut.seq.SeqFromIterator;
@@ -24,7 +25,7 @@ public abstract class AbstractCollection<E> implements ImmutableCollection<E>
     @Override
     public boolean isEmpty()
     {
-        return elementCount() == Int.ZERO;
+        return elementCount() == BigInteger.ZERO;
     }
     
 

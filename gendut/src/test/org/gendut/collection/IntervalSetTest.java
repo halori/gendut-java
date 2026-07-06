@@ -1,12 +1,11 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.Random;
 
 import junit.framework.TestCase;
 
-import org.gendut.arithmetic.Int;
-import org.gendut.arithmetic.Rational;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -14,28 +13,28 @@ import org.gendut.seq.Seq;
 
 public class IntervalSetTest extends TestCase
 {
-    Comparator<Rational> cmp = Rational.naturallOrder;
+    Comparator<BigInteger> cmp = Comparator.naturalOrder();
 
     public void tesInsertIntoTree()
     {
-        Object tree = new Interval<Int>(Int.create(0), Int.create(2), cmp);
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(3), Int.create(5), cmp));
+        Object tree = new Interval<BigInteger>(BigInteger.valueOf(0), BigInteger.valueOf(2), cmp);
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(3), BigInteger.valueOf(5), cmp));
         assertEquals("([0,2) 5:[3,5) .)", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(3), Int.create(5), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(3), BigInteger.valueOf(5), cmp));
         assertEquals("([0,2) 5:[3,5) .)", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(5), Int.create(7), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(5), BigInteger.valueOf(7), cmp));
         assertEquals("([0,2) 7:[3,5) [5,7))", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(2), Int.create(7), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(2), BigInteger.valueOf(7), cmp));
         assertEquals("(([0,2) 7:[2,7) .) 7:[3,5) [5,7))", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(8), Int.create(9), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(8), BigInteger.valueOf(9), cmp));
         assertEquals("(([0,2) 7:[2,7) .) 9:[3,5) ([5,7) 9:[8,9) .))", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(10), Int.create(11), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(10), BigInteger.valueOf(11), cmp));
         assertEquals("(([0,2) 7:[2,7) .) 11:[3,5) ([5,7) 11:[8,9) [10,11)))", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(12), Int.create(13), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(12), BigInteger.valueOf(13), cmp));
         assertEquals("(([0,2) 7:[2,7) .) 13:[3,5) ([5,7) 13:[8,9) ([10,11) 13:[12,13) .)))", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(12), Int.create(14), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(12), BigInteger.valueOf(14), cmp));
         assertEquals("(([0,2) 7:[2,7) .) 14:[3,5) ([5,7) 14:[8,9) ([10,11) 14:[12,13) [12,14))))", tree.toString());
-        tree = IntervalSet.insert(tree, new Interval<Int>(Int.create(13), Int.create(14), cmp));
+        tree = IntervalSet.insert(tree, new Interval<BigInteger>(BigInteger.valueOf(13), BigInteger.valueOf(14), cmp));
         assertEquals("(([0,2) 7:[2,7) .) 14:[3,5) (([5,7) 11:[8,9) [10,11)) 14:[12,13) ([12,14) 14:[13,14) .)))", tree
                         .toString());
         assertEquals(2, IntervalSet.height(IntervalSet.left(tree)));
@@ -53,13 +52,13 @@ public class IntervalSetTest extends TestCase
             Object tree = IntervalSet.emptyTree;
             for (int i = 0; i < k; i++)
             {
-                Interval<Int> s = new Interval<Int>(Int.create(4 * i), Int.create(4 * i + 1), cmp);
+                Interval<BigInteger> s = new Interval<BigInteger>(BigInteger.valueOf(4 * i), BigInteger.valueOf(4 * i + 1), cmp);
                 tree = IntervalSet.insert(tree, s);
             }
             assertEquals(k, IntervalSet.count(tree));
             for (int i = 0; i < 2 * k; i++)
             {
-                Interval<Int> s = new Interval<Int>(Int.create(-4 * i - 1), Int.create(-4 * i), cmp);
+                Interval<BigInteger> s = new Interval<BigInteger>(BigInteger.valueOf(-4 * i - 1), BigInteger.valueOf(-4 * i), cmp);
                 tree = IntervalSet.insert(tree, s);
             }
             assertEquals(3 * k, IntervalSet.count(tree));

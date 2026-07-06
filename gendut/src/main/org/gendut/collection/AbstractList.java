@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.iterator.ForwardIterator;
 
 
@@ -16,7 +17,7 @@ abstract public class AbstractList<E> extends AbstractCollection<E> implements L
      * This method may not return for infinite lists
      */
     @Override
-    public Int elementCount()
+    public BigInteger elementCount()
     {
         ForwardIterator<?> it = iterator();
         long cnt = 0;
@@ -25,10 +26,10 @@ abstract public class AbstractList<E> extends AbstractCollection<E> implements L
             cnt++;
             it.next();
         }
-        Int count = Int.create(cnt);
+        BigInteger count = BigInteger.valueOf(cnt);
         while (it.hasNext())
         {
-            count = count.add(Int.ONE);
+            count = count.add(BigInteger.ONE);
             it.next();
         }
         return count;

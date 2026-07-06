@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.NoSuchElementException;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -222,8 +222,8 @@ public final class FixedSizeHashSet<E> extends ImmutableArrayBase<Object>
 			return (E) place;
 	}
 
-	public Int elementCount() {
-		return Int.create(size());
+	public BigInteger elementCount() {
+		return BigInteger.valueOf(size());
 	}
 
 	public FixedSizeHashSet<E> clear() {
@@ -245,7 +245,7 @@ public final class FixedSizeHashSet<E> extends ImmutableArrayBase<Object>
 
 	@Override
 	public boolean isEmpty() {
-		return elementCount() == Int.ZERO;
+		return elementCount() == BigInteger.ZERO;
 	}
 
 	@Override

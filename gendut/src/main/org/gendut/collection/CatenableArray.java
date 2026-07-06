@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.func.Function;
 import org.gendut.iterator.ForwardIterator;
 
@@ -9,15 +10,15 @@ public interface CatenableArray<E> extends Array<E> {
 
   public CatenableArray<E> catenateTo(CatenableArray<? extends E> array);
 
-  public CatenableArray<E> subArray(Int start, Int end);
+  public CatenableArray<E> subArray(BigInteger start, BigInteger end);
 
   public CatenableArray<E> subArray(long start, long end);
 
-  public ForwardIterator<E> iterator(Int start);
+  public ForwardIterator<E> iterator(BigInteger start);
 
   public ForwardIterator<E> iterator(long start);
 
-  public E get(Int pos);
+  public E get(BigInteger  pos);
 
   public E get(long pos);
 
@@ -27,7 +28,7 @@ public interface CatenableArray<E> extends Array<E> {
    * lot of structural sharing), a more sophisticated graph-traversal should be
    * used.
    */
-  public Int firstOf(E e);
+  public BigInteger firstOf(E e);
 
   /**
    * If the array is sorted array, the order relation will be used, otherwise we
@@ -35,29 +36,29 @@ public interface CatenableArray<E> extends Array<E> {
    * lot of structural sharing), a more sophisticated graph-traversal should be
    * used.
    */
-  public Int lastOf(E e);
+  public BigInteger lastOf(E e);
 
   /**
    * If the array is very long (i.e. has a lot of structural sharing), a more
    * sophisticated graph-traversal should be used.
    */
-  public Int firstOf(Function<E, Boolean> condition);
+  public BigInteger firstOf(Function<E, Boolean> condition);
 
   /**
    * If the array is very long (i.e. has a lot of structural sharing), a more
    * sophisticated graph-traversal should be used.
    */
-  public Int lastOf(Function<E, Boolean> condition);
+  public BigInteger lastOf(Function<E, Boolean> condition);
 
-  public CatenableArray<E> insertAt(Int pos, E e);
+  public CatenableArray<E> insertAt(BigInteger pos, E e);
 
   public CatenableArray<E> insertAt(long pos, E e);
 
-  public CatenableArray<E> replaceAt(Int pos, E e);
+  public CatenableArray<E> replaceAt(BigInteger pos, E e);
 
   public CatenableArray<E> replaceAt(long pos, E e);
 
-  public CatenableArray<E> removeAt(Int pos);
+  public CatenableArray<E> removeAt(BigInteger pos);
 
   public CatenableArray<E> removeAt(long pos);
 

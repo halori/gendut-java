@@ -1,9 +1,10 @@
 package org.gendut.collection;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -161,9 +162,9 @@ public final class ConstantArray<E> extends AbstractList<E> implements Array<E>
     }
 
     @Override
-    public Int elementCount()
+    public BigInteger elementCount()
     {
-        return Int.create(size());
+        return BigInteger.valueOf(size());
     }
 
     @Override

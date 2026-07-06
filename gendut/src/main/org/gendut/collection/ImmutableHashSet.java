@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.iterator.ConcatIterator;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.seq.Seq;
@@ -175,8 +176,8 @@ final public class ImmutableHashSet<E> extends AbstractCollection<E> implements
 		throw new IllegalStateException("unrestricted capacity.");
 	}
 
-	public Int elementCount() {
-		return Int.create(size());
+	public BigInteger elementCount() {
+		return BigInteger.valueOf(size());
 	}
 
 	@SuppressWarnings("unchecked")

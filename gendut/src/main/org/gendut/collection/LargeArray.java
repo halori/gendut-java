@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.func.Function;
 
 /**
@@ -44,12 +44,12 @@ public final class LargeArray<E> extends CatenableArrayTree<E> implements
     return (LargeArray<E>) super.catenate(array);
   }
 
-  public LargeArray<E> subArray(Int start, Int end) {
+  public LargeArray<E> subArray(BigInteger start, BigInteger end) {
     // TODO Auto-generated method stub
     return null;
   }
   
-  final public Int lastOf(final E e) {
+  final public BigInteger lastOf(final E e) {
     return lastOf(new Function<E, Boolean>() {
       @Override
       public Boolean get(E f) {
@@ -58,7 +58,7 @@ public final class LargeArray<E> extends CatenableArrayTree<E> implements
     });
   }
 
-  final public Int firstOf(final E e) {
+  final public BigInteger firstOf(final E e) {
      return firstOf(new Function<E, Boolean>() {
 		@Override
 		public Boolean get(E f) {
@@ -67,15 +67,15 @@ public final class LargeArray<E> extends CatenableArrayTree<E> implements
 	});
   }
 
-  public LargeArray<E> insertAt(Int pos, E e) {
+  public LargeArray<E> insertAt(BigInteger pos, E e) {
 	  return new LargeArray<E>(insertAt(root, pos, e));
   }
 
-  public LargeArray<E> replaceAt(Int pos, E e) {
+  public LargeArray<E> replaceAt(BigInteger pos, E e) {
     return new LargeArray<E>(replace(root, pos, e));
   }
 
-  public LargeArray<E> removeAt(Int pos) {
+  public LargeArray<E> removeAt(BigInteger pos) {
     // TODO Auto-generated method stub
     return null;
   }
@@ -91,19 +91,19 @@ public final class LargeArray<E> extends CatenableArrayTree<E> implements
   }
 
   public LargeArray<E> insertAt(long pos, E e) {
-    return insertAt(Int.create(pos), e);
+    return insertAt(BigInteger.valueOf(pos), e);
   }
 
   public LargeArray<E> removeAt(long pos) {
-    return removeAt(Int.create(pos));
+    return removeAt(BigInteger.valueOf(pos));
   }
 
   public LargeArray<E> replaceAt(long pos, E e) {
-    return replaceAt(Int.create(pos), e);
+    return replaceAt(BigInteger.valueOf(pos), e);
   }
 
   public LargeArray<E> subArray(long start, long end) {
-    return subArray(Int.create(start), Int.create(end));
+    return subArray(BigInteger.valueOf(start), BigInteger.valueOf(end));
   }
 
   public LargeArray<E> addMap(MonoidMap<E, ?> map) {

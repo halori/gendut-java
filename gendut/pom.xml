@@ -20,12 +20,6 @@
             <version>4.9</version>
             <scope>test</scope>
         </dependency>
-	<dependency>
-            <groupId>org.gendut</groupId>
-            <artifactId>gendut-base</artifactId>
-            <version>0.8</version>
-            <scope>compile</scope>
-        </dependency>
        </dependencies>
 	<build>
 		<sourceDirectory>src/main</sourceDirectory>

@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.collection.mutable.ExtendibleArray;
 import org.gendut.collection.mutable.MutableValue;
 import org.gendut.func.Function;
@@ -473,8 +473,8 @@ public final class IntervalSet<T, I extends IntervalRecord<T, I>> extends
 		return find(e) != null;
 	}
 
-	public Int elementCount() {
-		return Int.create(count(tree));
+	public BigInteger elementCount() {
+		return BigInteger.valueOf(count(tree));
 	}
 
 	@SuppressWarnings("unchecked")

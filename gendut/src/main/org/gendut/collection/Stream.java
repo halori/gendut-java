@@ -1,8 +1,8 @@
 package org.gendut.collection;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.errors.Assertions;
 import org.gendut.func.Function;
 import org.gendut.func.Functions;
@@ -72,7 +72,7 @@ public final class Stream<E> extends AbstractList<E> implements Seq<E> {
 		return Collections.reduce(seq, op, e);
 	}
 
-	public Int count() {
+	public BigInteger count() {
 		return Collections.count(seq);
 	}
 

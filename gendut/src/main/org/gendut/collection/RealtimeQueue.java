@@ -1,7 +1,9 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
 import org.gendut.func.Pair;
+
+import java.math.BigInteger;
+
 import org.gendut.func.Function;
 import org.gendut.iterator.ForwardIterator;
 import org.gendut.iterator.IteratorFromSeq;
@@ -131,8 +133,8 @@ public final class RealtimeQueue<E> implements ImmutableCollection<E>, Array<E> 
 		return length;
 	}
 
-	public Int elementCount() {
-		return Int.create(size());
+	public BigInteger  elementCount() {
+		return BigInteger.valueOf(size());
 	}
 
 	public E find(E e) {

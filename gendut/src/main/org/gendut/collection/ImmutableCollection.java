@@ -1,6 +1,7 @@
 package org.gendut.collection;
 
-import org.gendut.arithmetic.Int;
+import java.math.BigInteger;
+
 import org.gendut.seq.Seq;
 
 
@@ -17,7 +18,7 @@ public interface ImmutableCollection<E> extends Seq<E>
     /**
      * Returns the size of the collection.
      */
-    public Int elementCount();
+    public BigInteger elementCount();
 
     /**
      * Tests if the collection contains an equal object.
