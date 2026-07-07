@@ -1,13 +1,15 @@
 package org.gendut.collection;
 
+import org.junit.Test;
+import static org.junit.Assert.*; 
 
-import junit.framework.TestCase;
 
-public class ConstantArrayTest extends TestCase {
+public class ConstantArrayTest {
   
   static final int N = 100;
   
-  static public void testByteArray() {
+  @Test 
+  public void testByteArray() {
 	  Byte a = 12;
 	  Byte b = 7;
 	  ConstantArray<Byte> array = ConstantArray.pair(a, b);
