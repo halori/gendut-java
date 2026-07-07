@@ -12,21 +12,30 @@
     <name>Gendut</name>
     <url>http://maven.apache.org</url>
 
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.9</version>
-            <scope>test</scope>
-        </dependency>
-       </dependencies>
-	<build>
-		<sourceDirectory>src/main</sourceDirectory>
-		<testSourceDirectory>src/test</testSourceDirectory>
-	</build>	
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+	    <maven.compiler.release>21</maven.compiler.release>
+	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<dependencies>
+	    <dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.13.2</version>
+		<scope>test</scope>
+	    </dependency>
+	</dependencies>
+
+
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!-- Version 3.13.0 oder neuer ist zwingend für Java 21 erforderlich -->
+                <version>3.13.0</version> 
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
