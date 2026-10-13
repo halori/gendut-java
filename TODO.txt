@@ -1,3 +1,18 @@
+BLOCKING - canonical structure for hash sets (start here):
+
+The current incremental rehashing in ImmutableHashSet does not produce a canonical
+structure: two independently built sets with identical content place ~48% of their
+elements into a different internal table, so nothing can be shared or pruned between
+them. Two ways out, still to be decided: rescue the rehashing with a hash-value
+slider (an element's table chosen by a size-derived threshold on its hash, making
+placement a pure function of the content), or replace the tables with a
+prefix-based hash tree, which is canonical by construction. The slider requires
+hashes spread over the whole value range, since raw Integer/String hashCodes
+collapse the split, and it still needs chains for degenerate hashes. Canonical
+layout and structural equals are separate problems, and layout alone does not
+solve equals. Node allocation has to be adapted for either route; together with
+structural equals expect at least one week.
+
 TODO: reimplementation:
 
 1. Lazy and O(1) srtucture nodes:
